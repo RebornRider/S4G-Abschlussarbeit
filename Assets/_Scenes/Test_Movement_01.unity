@@ -333,7 +333,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 4e11ef4f39bc65e44a4b0755ecac6ea1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.496526
+      value: 3.42
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4e11ef4f39bc65e44a4b0755ecac6ea1, type: 2}
       propertyPath: m_LocalPosition.y
@@ -425,7 +425,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: d85d3a32fb6157d488e31edf82b7b1c4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 7.716526
+      value: 6.59
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d85d3a32fb6157d488e31edf82b7b1c4, type: 2}
       propertyPath: m_LocalPosition.y
@@ -616,6 +616,7 @@ GameObject:
   - component: {fileID: 1473243142}
   - component: {fileID: 1473243141}
   - component: {fileID: 1473243140}
+  - component: {fileID: 1473243145}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -693,6 +694,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 25.483002, y: 0, z: 0}
+--- !u!114 &1473243145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1473243139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b990980d105a6c47a503f629a1dc919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Anchor: {fileID: 1887457592}
+  _AnchorOffset: {x: 0, y: 2, z: 0}
+  _Radius: 4
+  _RotationSpeed: 120
+  _InvertPitch: 1
 --- !u!1001 &1731398940
 Prefab:
   m_ObjectHideFlags: 0

@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30cb05ce3b64e30aa73521dcdcebf8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  Rb: {fileID: 54099937290904166}
   GroundLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -229,8 +229,8 @@ MonoBehaviour:
   forwardSpeed: 1
   sidewardSpeed: 1
   JumpHeight: 2
-  GroundDistance: 0.2
   DashDistance: 5
+  FallSpeed: 50
 --- !u!136 &136943996185511510
 CapsuleCollider:
   m_ObjectHideFlags: 1
