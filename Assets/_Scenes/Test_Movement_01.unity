@@ -214,6 +214,11 @@ Prefab:
       propertyPath: GroundDistance
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 114617724019800172, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: CameraRig
+      value: 
+      objectReference: {fileID: 1473243145}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a142e41abd9b0d948a96bd33e33ccfee, type: 2}
   m_IsPrefabParent: 0
@@ -705,11 +710,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b990980d105a6c47a503f629a1dc919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Anchor: {fileID: 1887457592}
-  _AnchorOffset: {x: 0, y: 2, z: 0}
-  _Radius: 4
-  _RotationSpeed: 120
-  _InvertPitch: 1
+  Anchor: {fileID: 1887457592}
+  anchorOffset: {x: 0, y: 2.5, z: 0}
+  radius: 4
+  degreesPerSecond: 1
+  invertPitch: 1
 --- !u!1001 &1731398940
 Prefab:
   m_ObjectHideFlags: 0

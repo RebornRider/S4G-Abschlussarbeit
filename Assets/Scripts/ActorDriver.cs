@@ -5,16 +5,18 @@ namespace PaladinCharacter
     public abstract class ActorDriver : MonoBehaviour
     {
         [SerializeField]
-        protected ActorMover mover;
+        protected ActorMover Mover;
+        [SerializeField]
+        protected CameraRig CameraRig;
 
         protected virtual void Awake()
         {
-            mover = mover ?? GetComponent<ActorMover>();
+            Mover = Mover ?? GetComponent<ActorMover>();
         }
 
         protected virtual void OnValidate()
         {
-            mover = mover ?? GetComponent<ActorMover>();
+            Mover = Mover ?? GetComponent<ActorMover>();
         }
     }
 }

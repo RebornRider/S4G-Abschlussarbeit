@@ -22,26 +22,33 @@ namespace PaladinCharacter
 
             if (inputs.IsApproximatelyVectorZero() == false)
             {
-                mover.SetIntendedVelocity(GetIntendedVelocity());
+                Mover.SetIntendedVelocity(GetIntendedVelocity());
             }
 
-            mover.CheckGrounding();
-            if (Input.GetKeyDown(KeyCode.LeftShift) && mover.IsGrounded)
+            Mover.CheckGrounding();
+            if (Input.GetKeyDown(KeyCode.LeftShift) && Mover.IsGrounded)
             {
-                mover.Dash(DashDistance);
+                Mover.Dash(DashDistance);
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                mover.Jump(JumpHeight);
+                Mover.Jump(JumpHeight);
             }
         }
 
         protected Vector3 GetIntendedVelocity()
         {
-            mover.CheckGrounding();
-            if (mover.IsGrounded)
+            Mover.CheckGrounding();
+            if (Mover.IsGrounded)
             {
-                return new Vector3(Input.GetAxis("Horizontal") * forwardSpeed, 0, Input.GetAxis("Vertical") * sidewardSpeed);
+                var planarDirectionInCameraSpace = Vector3.ProjectOnPlane(CameraRig.transform.TransformDirection(new Vector3(
+                    Input.GetAxis("Horizontal"), 0,
+                    Input.GetAxis("Vertical"))), Vector3.up).normalized;
+
+                planarDirectionInCameraSpace.x *= forwardSpeed;
+                planarDirectionInCameraSpace.z *= sidewardSpeed;
+
+                return planarDirectionInCameraSpace;
             }
             else
             {
