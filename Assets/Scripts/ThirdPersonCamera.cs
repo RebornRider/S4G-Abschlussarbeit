@@ -42,13 +42,6 @@ namespace PaladinCharacter
         /// </summary>
         private Quaternion tilt = Quaternion.identity;
 
-
-        public override Vector3 Forward
-        {
-            get { return transform.forward; }
-        }
-
-
         public void LateUpdate()
         {
             Vector3 ofsettedAnchorPosition = Anchor.position + (Anchor.rotation * anchorOffset);

@@ -13,7 +13,5 @@ namespace PaladinCharacter
         [SerializeField]
         protected Vector3 anchorOffset = new Vector3(0f, 2f, 0f);
 
-        public abstract Vector3 Forward { get; }
-
     }
 }
