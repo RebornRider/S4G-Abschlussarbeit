@@ -117,6 +117,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4370339756901752, guid: a142e41abd9b0d948a96bd33e33ccfee, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -187,12 +192,12 @@ Prefab:
     - target: {fileID: 114617724019800172, guid: a142e41abd9b0d948a96bd33e33ccfee,
         type: 2}
       propertyPath: forwardSpeed
-      value: 5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 114617724019800172, guid: a142e41abd9b0d948a96bd33e33ccfee,
         type: 2}
       propertyPath: sidewardSpeed
-      value: 5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 114617724019800172, guid: a142e41abd9b0d948a96bd33e33ccfee,
         type: 2}
@@ -219,6 +224,76 @@ Prefab:
       propertyPath: CameraRig
       value: 
       objectReference: {fileID: 1473243145}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_Curve.Array.data[1].time
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_Curve.Array.data[1].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_Curve.Array.data[1].inSlope
+      value: 16.666668
+      objectReference: {fileID: 0}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_Curve.Array.data[1].outSlope
+      value: 8.333333
+      objectReference: {fileID: 0}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_Curve.Array.data[0].outSlope
+      value: 16.666668
+      objectReference: {fileID: 0}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_Curve.Array.data[2].time
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_Curve.Array.data[2].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_Curve.Array.data[1].tangentMode
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_Curve.Array.data[2].inSlope
+      value: 8.333333
+      objectReference: {fileID: 0}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_Curve.Array.data[2].tangentMode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 485080347}
+    - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
+        type: 2}
+      propertyPath: distanceToForwardMovementSpeed.m_Curve.Array.data[0].tangentMode
+      value: 65
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a142e41abd9b0d948a96bd33e33ccfee, type: 2}
   m_IsPrefabParent: 0
@@ -301,6 +376,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!95 &485080347 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95995230516737226, guid: a142e41abd9b0d948a96bd33e33ccfee,
+    type: 2}
+  m_PrefabInternal: {fileID: 257573164}
 --- !u!1 &522489659
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,6 +679,10 @@ Prefab:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3300000, guid: c02747e7134ef1948a039c94a8f33c5b, type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 6400000, guid: c02747e7134ef1948a039c94a8f33c5b, type: 2}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
