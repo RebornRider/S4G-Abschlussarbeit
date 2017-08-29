@@ -5,18 +5,32 @@ namespace PaladinCharacter
     public abstract class ActorMover : MonoBehaviour
     {
         [SerializeField]
-        protected CharacterController characterController;
+        protected Rigidbody Rb;
+
+        protected bool isGrounded = true;
+        protected Vector3 IntendedVelocity;
+        public bool IsGrounded
+        {
+            get { return isGrounded; }
+        }
 
         protected virtual void Awake()
         {
-            characterController = characterController ?? GetComponent<CharacterController>();
+            Rb = Rb ?? GetComponent<Rigidbody>();
         }
 
         protected virtual void OnValidate()
         {
-            characterController = characterController ?? GetComponent<CharacterController>();
+            Rb = Rb ?? GetComponent<Rigidbody>();
         }
 
-        public abstract void SetIntendedVelocity(Vector3 intendedVelocity);
+        public virtual void SetIntendedVelocity(Vector3 intendedVelocity)
+        {
+            IntendedVelocity = intendedVelocity;
+        }
+
+        public abstract void Dash(float dashDistance);
+        public abstract void Jump(float jumpHeight);
+        public abstract void CheckGrounding();
     }
 }
