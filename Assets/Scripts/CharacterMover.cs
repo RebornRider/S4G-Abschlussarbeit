@@ -10,6 +10,12 @@ namespace PaladinCharacter
         protected float GroundDistance = 0.2f;
         [SerializeField]
         protected Transform GroundChecker;
+        [SerializeField]
+        protected AnimationCurve distanceToForwardMovementSpeed;
+
+        private float smoothedIntednedVelocity;
+
+        public Animator anim;
 
         public override void Dash(float dashDistance)
         {
@@ -32,14 +38,30 @@ namespace PaladinCharacter
             isGrounded = Physics.CheckSphere(GroundChecker.position, GroundDistance, GroundLayers, QueryTriggerInteraction.Ignore);
         }
 
+        private Vector3 lastPos;
         public virtual void FixedUpdate()
         {
-            Rb.MovePosition(Rb.position + IntendedVelocity * Time.fixedDeltaTime);
+            Vector3 moveDelta = IntendedVelocity * Time.fixedDeltaTime;
+            if (Mathf.Abs(moveDelta.x) + Mathf.Abs(moveDelta.z) > 0.001)
+            {
+                Rb.velocity += moveDelta;
+                Debug.DrawRay(Rb.position, moveDelta * 100, Color.red);
+            }
+            else
+            {
+                Debug.DrawRay(Rb.position, moveDelta * 100, Color.green);
+            }
+
+            //Rb.MovePosition(Rb.position + moveDelta);
             Vector3 movementDirection = Vector3.ProjectOnPlane(IntendedVelocity, Vector3.up);
             if (movementDirection.IsApproximatelyVectorZero() == false)
             {
                 Rb.MoveRotation(Quaternion.LookRotation(movementDirection));
             }
+
+            float distance = Vector3.Distance(lastPos, transform.position);
+            anim.SetFloat("ForwardMovementSpeed", distanceToForwardMovementSpeed.Evaluate(distance));
+            lastPos = transform.position;
         }
     }
 

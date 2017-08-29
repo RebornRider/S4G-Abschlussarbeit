@@ -45,14 +45,13 @@ namespace PaladinCharacter
             Mover.CheckGrounding();
             if (Mover.IsGrounded)
             {
-                var planarDirectionInCameraSpace = Vector3.ProjectOnPlane(CameraRig.transform.TransformDirection(new Vector3(
-                    Input.GetAxis("Horizontal"), 0,
-                    Input.GetAxis("Vertical"))), Vector3.up).normalized;
+                var forwardMovement = Vector3.ProjectOnPlane(CameraRig.transform.forward * Input.GetAxis("Vertical") * forwardSpeed, Vector3.up);
+                var sidewardsMovement = Vector3.ProjectOnPlane(CameraRig.transform.right * Input.GetAxis("Horizontal") * sidewardSpeed, Vector3.up);
 
-                planarDirectionInCameraSpace.x *= forwardSpeed;
-                planarDirectionInCameraSpace.z *= sidewardSpeed;
+                Vector3 movementDirection = Vector3.Lerp(forwardMovement, sidewardsMovement, 0.5f);
+                Debug.DrawRay(transform.position, movementDirection, Color.cyan);
 
-                return planarDirectionInCameraSpace;
+                return movementDirection;
             }
             else
             {
