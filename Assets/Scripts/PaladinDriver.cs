@@ -24,6 +24,10 @@ namespace PaladinCharacter
             {
                 Mover.SetIntendedVelocity(GetIntendedVelocity());
             }
+            else
+            {
+                Mover.SetIntendedVelocity(Vector3.zero);
+            }
 
             Mover.CheckGrounding();
             if (Input.GetKeyDown(KeyCode.LeftShift) && Mover.IsGrounded)

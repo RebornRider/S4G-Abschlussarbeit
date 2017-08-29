@@ -197,7 +197,7 @@ Prefab:
     - target: {fileID: 114617724019800172, guid: a142e41abd9b0d948a96bd33e33ccfee,
         type: 2}
       propertyPath: JumpHeight
-      value: 3
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 54099937290904166, guid: a142e41abd9b0d948a96bd33e33ccfee,
         type: 2}
