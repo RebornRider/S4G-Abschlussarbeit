@@ -71,6 +71,9 @@ GameObject:
   - component: {fileID: 136943996185511510}
   - component: {fileID: 114276160133918334}
   - component: {fileID: 114617724019800172}
+  - component: {fileID: 114982255882892990}
+  - component: {fileID: 114845919964334344}
+  - component: {fileID: 114312219841894368}
   m_Layer: 0
   m_Name: Paladin
   m_TagString: Untagged
@@ -243,31 +246,22 @@ MonoBehaviour:
     m_Bits: 17
   GroundDistance: 0.1
   GroundChecker: {fileID: 4524643767763396}
-  distanceToForwardMovementSpeed:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 16.666668
-      tangentMode: 65
-    - serializedVersion: 2
-      time: 0.03
-      value: 0.5
-      inSlope: 16.666668
-      outSlope: 8.333333
-      tangentMode: 69
-    - serializedVersion: 2
-      time: 0.09
-      value: 1
-      inSlope: 8.333333
-      outSlope: 0
-      tangentMode: 5
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  anim: {fileID: 95995230516737226}
+  Animator: {fileID: 114982255882892990}
+--- !u!114 &114312219841894368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1916755701986244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a8e4d146f44a558c495a4e95875e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalAxisName: Horizontal
+  verticalAxisName: Vertical
+  jumpButtonName: Jump
+  dashButtonName: Fire3
 --- !u!114 &114617724019800172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -281,11 +275,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mover: {fileID: 114276160133918334}
   CameraRig: {fileID: 0}
+  InputSource: {fileID: 114312219841894368}
   forwardSpeed: 100
   sidewardSpeed: 100
+  Animator: {fileID: 114982255882892990}
   JumpHeight: 10
   DashDistance: 2
   FallSpeed: 50
+--- !u!114 &114845919964334344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1916755701986244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a8e4d146f44a558c495a4e95875e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalAxisName: Horizontal
+  verticalAxisName: Vertical
+  jumpButtonName: Jump
+  dashButtonName: Fire3
+--- !u!114 &114982255882892990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1916755701986244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d1540e019e9463abefe18bb58da97d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 95995230516737226}
+  distanceToForwardMovementSpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 16.666668
+      outSlope: 16.666668
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.03
+      value: 0.5
+      inSlope: 16.666668
+      outSlope: 8.333333
+      tangentMode: 69
+    - serializedVersion: 2
+      time: 0.09
+      value: 1
+      inSlope: 8.333333
+      outSlope: 8.333333
+      tangentMode: 34
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!136 &136943996185511510
 CapsuleCollider:
   m_ObjectHideFlags: 1

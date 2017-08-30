@@ -9,6 +9,8 @@ namespace PaladinCharacter
         private float forwardSpeed = 1;
         [SerializeField]
         private float sidewardSpeed = 1;
+        [SerializeField]
+        protected PaladinAnimator Animator;
 
         public float JumpHeight = 2f;
         public float DashDistance = 5f;
@@ -16,12 +18,7 @@ namespace PaladinCharacter
 
         public void Update()
         {
-
-            Vector3 inputs = Vector3.zero;
-            inputs.x = Input.GetAxis("Horizontal");
-            inputs.z = Input.GetAxis("Vertical");
-
-            if (inputs.IsApproximatelyVectorZero() == false)
+            if (InputSource.GetMovementTwoAxis().IsApproximatelyVectorZero() == false)
             {
                 Mover.SetIntendedVelocity(GetIntendedVelocity());
             }
@@ -31,11 +28,11 @@ namespace PaladinCharacter
             }
 
             Mover.CheckGrounding();
-            if (Input.GetKeyDown(KeyCode.LeftShift) && Mover.IsGrounded)
+            if (InputSource.WasDashPressed() && Mover.IsGrounded)
             {
                 Mover.Dash(DashDistance);
             }
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (InputSource.WasJumpPressed())
             {
                 Mover.Jump(JumpHeight);
             }
@@ -46,8 +43,8 @@ namespace PaladinCharacter
             Mover.CheckGrounding();
             if (Mover.IsGrounded)
             {
-                var forwardMovement = Vector3.ProjectOnPlane(CameraRig.transform.forward * Input.GetAxis("Vertical") * forwardSpeed, Vector3.up);
-                var sidewardsMovement = Vector3.ProjectOnPlane(CameraRig.transform.right * Input.GetAxis("Horizontal") * sidewardSpeed, Vector3.up);
+                var forwardMovement = Vector3.ProjectOnPlane(CameraRig.transform.forward * InputSource.GetCameraTwoAxis().y * forwardSpeed, Vector3.up);
+                var sidewardsMovement = Vector3.ProjectOnPlane(CameraRig.transform.right * InputSource.GetCameraTwoAxis().x * sidewardSpeed, Vector3.up);
 
                 Vector3 movementDirection = Vector3.Lerp(forwardMovement, sidewardsMovement, 0.5f);
                 Debug.DrawRay(transform.position, movementDirection, Color.cyan);

@@ -13,11 +13,8 @@ namespace PaladinCharacter
         [SerializeField]
         protected Transform GroundChecker;
         [SerializeField]
-        protected AnimationCurve distanceToForwardMovementSpeed;
+        protected PaladinAnimator Animator;
 
-        private float smoothedIntednedVelocity;
-
-        public Animator anim;
 
         public override void Dash(float dashDistance)
         {
@@ -53,17 +50,6 @@ namespace PaladinCharacter
                 {
                     groundHit = distanceSortedColliders.First();
                 }
-
-                Debug.Log(hitCount);
-                for (var i = 0; i < hitCount; i++)
-                {
-                    Debug.Log(i + ": " + results[i].transform.name + " | " + results[i].point + " | " + results[i].normal);
-                    Debug.DrawRay(Rb.position, results[i].normal * 100, Color.magenta);
-                }
-                foreach (var raycastHit in results.Take(hitCount))
-                {
-                    Debug.DrawRay(Rb.position, raycastHit.normal * 100, Color.magenta);
-                }
             }
             else
             {
@@ -80,7 +66,7 @@ namespace PaladinCharacter
             Vector3 moveDelta = IntendedVelocity * Time.fixedDeltaTime;
             float distance = Vector3.Distance(lastPos, transform.position);
 
-            anim.SetFloat("ForwardMovementSpeed", distanceToForwardMovementSpeed.Evaluate(distance));
+            Animator.SetMovementDistance(distance);
             CheckGrounding();
 
             if (Mathf.Abs(moveDelta.x) + Mathf.Abs(moveDelta.z) > 0.001)

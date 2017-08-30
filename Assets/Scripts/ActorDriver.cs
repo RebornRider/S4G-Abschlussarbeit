@@ -8,15 +8,17 @@ namespace PaladinCharacter
         protected ActorMover Mover;
         [SerializeField]
         protected CameraRig CameraRig;
+        [SerializeField]
+        protected InputSource InputSource;
 
         protected virtual void Awake()
         {
-            Mover = Mover ?? GetComponent<ActorMover>();
+            InputSource = InputSource ?? GetComponent<InputSource>();
         }
 
         protected virtual void OnValidate()
         {
-            Mover = Mover ?? GetComponent<ActorMover>();
+            InputSource = InputSource ?? GetComponent<InputSource>();
         }
     }
 }
