@@ -39,7 +39,7 @@ namespace PaladinCharacter
         private RaycastHit groundHit;
         public override void CheckGrounding()
         {
-            int hitCount = Physics.SphereCastNonAlloc(GroundChecker.position + Vector3.up * 0.01f, 0.01f, Vector3.down, results, GroundDistance,
+            int hitCount = Physics.SphereCastNonAlloc(GroundChecker.position + Vector3.up * 0.01f, 0.01f, Vector3.down, results, GroundDistance + 0.01f,
                 GroundLayers.value, QueryTriggerInteraction.Ignore);
             if (hitCount > 0)
             {
@@ -86,7 +86,7 @@ namespace PaladinCharacter
             if (Mathf.Abs(moveDelta.x) + Mathf.Abs(moveDelta.z) > 0.001)
             {
                 int hitCount = Physics.RaycastNonAlloc(new Ray(GroundChecker.position + Vector3.up * 0.01f, Vector3.down), results,
-                    GroundDistance, GroundLayers.value, QueryTriggerInteraction.Ignore);
+                    GroundDistance + 0.01f, GroundLayers.value, QueryTriggerInteraction.Ignore);
                 if (hitCount > 0)
                 {
                     var distanceSortedColliders = results
