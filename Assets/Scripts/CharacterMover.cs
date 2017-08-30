@@ -39,17 +39,37 @@ namespace PaladinCharacter
         private RaycastHit groundHit;
         public override void CheckGrounding()
         {
-            for (var i = 0; i < results.Length; i++)
+            int hitCount = Physics.SphereCastNonAlloc(GroundChecker.position + Vector3.up * 0.01f, 0.01f, Vector3.down, results, GroundDistance,
+                GroundLayers.value, QueryTriggerInteraction.Ignore);
+            if (hitCount > 0)
             {
-                results[i] = default(RaycastHit);
+                var distanceSortedColliders = results
+                    .Take(hitCount)
+                    .Where(hit => hit.transform != null && hit.transform.gameObject != gameObject &&
+                                  (GroundChecker.position.y - hit.point.y) > 0)
+                    .OrderBy(hit => GroundChecker.position.y - hit.point.y);
+                isGrounded = distanceSortedColliders.Any();
+                if (isGrounded)
+                {
+                    groundHit = distanceSortedColliders.First();
+                }
+
+                Debug.Log(hitCount);
+                for (var i = 0; i < hitCount; i++)
+                {
+                    Debug.Log(i + ": " + results[i].transform.name + " | " + results[i].point + " | " + results[i].normal);
+                    Debug.DrawRay(Rb.position, results[i].normal * 100, Color.magenta);
+                }
+                foreach (var raycastHit in results.Take(hitCount))
+                {
+                    Debug.DrawRay(Rb.position, raycastHit.normal * 100, Color.magenta);
+                }
             }
-            Physics.SphereCastNonAlloc(GroundChecker.position, GroundDistance, Vector3.down, results, 0.1f, GroundLayers.value, QueryTriggerInteraction.Ignore);
-            var distanceSortedColliders = results.Where(hit => hit.transform != null && hit.transform.gameObject != gameObject && (GroundChecker.position.y - hit.point.y) > 0).OrderBy(hit => GroundChecker.position.y - hit.point.y);
-            isGrounded = distanceSortedColliders.Any();
-            if (isGrounded)
+            else
             {
-                groundHit = distanceSortedColliders.First();
+                isGrounded = false;
             }
+
 
         }
 
@@ -65,30 +85,38 @@ namespace PaladinCharacter
 
             if (Mathf.Abs(moveDelta.x) + Mathf.Abs(moveDelta.z) > 0.001)
             {
+                int hitCount = Physics.RaycastNonAlloc(new Ray(GroundChecker.position + Vector3.up * 0.01f, Vector3.down), results,
+                    GroundDistance, GroundLayers.value, QueryTriggerInteraction.Ignore);
+                if (hitCount > 0)
+                {
+                    var distanceSortedColliders = results
+                        .Take(hitCount)
+                        .Where(hit => hit.transform != null && hit.transform.gameObject != gameObject &&
+                                      (GroundChecker.position.y - hit.point.y) > 0)
+                        .OrderBy(hit => GroundChecker.position.y - hit.point.y);
+
+                    if (distanceSortedColliders.Any())
+                    {
+                        Rb.MovePosition(distanceSortedColliders.First().point);
+                        CheckGrounding();
+                    }
+                }
+
+                if (isGrounded)
+                {
+                    moveDelta = Vector3.ProjectOnPlane(moveDelta, groundHit.normal);
+                }
                 Rb.velocity += moveDelta;
                 Debug.DrawRay(Rb.position, moveDelta * 100, Color.red);
-
-                for (var i = 0; i < results.Length; i++)
-                {
-                    results[i] = default(RaycastHit);
-                }
-                Physics.RaycastNonAlloc(new Ray(GroundChecker.position, Vector3.down), results, GroundDistance * 0.5f, GroundLayers.value, QueryTriggerInteraction.Ignore);
-                var distanceSortedColliders = results.Where(hit => hit.transform != null && hit.transform.gameObject != gameObject && (GroundChecker.position.y - hit.point.y) > 0).OrderBy(hit => GroundChecker.position.y - hit.point.y);
-                if (distanceSortedColliders.Any())
-                {
-                    Rb.MovePosition(distanceSortedColliders.First().point);
-                    CheckGrounding();
-                }
             }
             else
             {
                 Debug.DrawRay(Rb.position, moveDelta * 100, Color.green);
             }
 
-            Debug.DrawRay(Rb.position, Rb.velocity.x0z() * 100, Color.magenta);
             if (IntendedVelocity.x0z().IsApproximatelyVectorZero() == false)
             {
-                Debug.Log(IntendedVelocity.x0z());
+
                 lookRotation = Quaternion.LookRotation(IntendedVelocity.x0z().normalized);
 
             }

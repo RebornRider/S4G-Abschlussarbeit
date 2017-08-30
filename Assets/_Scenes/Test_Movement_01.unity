@@ -212,12 +212,12 @@ Prefab:
     - target: {fileID: 136943996185511510, guid: a142e41abd9b0d948a96bd33e33ccfee,
         type: 2}
       propertyPath: m_Radius
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 114276160133918334, guid: a142e41abd9b0d948a96bd33e33ccfee,
         type: 2}
       propertyPath: GroundDistance
-      value: 0.8
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 114617724019800172, guid: a142e41abd9b0d948a96bd33e33ccfee,
         type: 2}
@@ -423,11 +423,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 4e11ef4f39bc65e44a4b0755ecac6ea1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.42
+      value: 3.96
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4e11ef4f39bc65e44a4b0755ecac6ea1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 7.9976573
+      value: 7.9977
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4e11ef4f39bc65e44a4b0755ecac6ea1, type: 2}
       propertyPath: m_LocalPosition.z
