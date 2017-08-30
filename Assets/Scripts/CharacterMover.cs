@@ -1,3 +1,5 @@
+using PaladinCharacter.Utility;
+using System.Linq;
 using UnityEngine;
 
 namespace PaladinCharacter
@@ -33,34 +35,65 @@ namespace PaladinCharacter
             CheckGrounding();
         }
 
+        private readonly RaycastHit[] results = new RaycastHit[16];
+        private RaycastHit groundHit;
         public override void CheckGrounding()
         {
-            isGrounded = Physics.CheckSphere(GroundChecker.position, GroundDistance, GroundLayers, QueryTriggerInteraction.Ignore);
+            for (var i = 0; i < results.Length; i++)
+            {
+                results[i] = default(RaycastHit);
+            }
+            Physics.SphereCastNonAlloc(GroundChecker.position, GroundDistance, Vector3.down, results, 0.1f, GroundLayers.value, QueryTriggerInteraction.Ignore);
+            var distanceSortedColliders = results.Where(hit => hit.transform != null && hit.transform.gameObject != gameObject && (GroundChecker.position.y - hit.point.y) > 0).OrderBy(hit => GroundChecker.position.y - hit.point.y);
+            isGrounded = distanceSortedColliders.Any();
+            if (isGrounded)
+            {
+                groundHit = distanceSortedColliders.First();
+            }
+
         }
 
         private Vector3 lastPos;
+        private Quaternion lookRotation = Quaternion.identity;
         public virtual void FixedUpdate()
         {
             Vector3 moveDelta = IntendedVelocity * Time.fixedDeltaTime;
+            float distance = Vector3.Distance(lastPos, transform.position);
+
+            anim.SetFloat("ForwardMovementSpeed", distanceToForwardMovementSpeed.Evaluate(distance));
+            CheckGrounding();
+
             if (Mathf.Abs(moveDelta.x) + Mathf.Abs(moveDelta.z) > 0.001)
             {
                 Rb.velocity += moveDelta;
                 Debug.DrawRay(Rb.position, moveDelta * 100, Color.red);
+
+                for (var i = 0; i < results.Length; i++)
+                {
+                    results[i] = default(RaycastHit);
+                }
+                Physics.RaycastNonAlloc(new Ray(GroundChecker.position, Vector3.down), results, GroundDistance * 0.5f, GroundLayers.value, QueryTriggerInteraction.Ignore);
+                var distanceSortedColliders = results.Where(hit => hit.transform != null && hit.transform.gameObject != gameObject && (GroundChecker.position.y - hit.point.y) > 0).OrderBy(hit => GroundChecker.position.y - hit.point.y);
+                if (distanceSortedColliders.Any())
+                {
+                    Rb.MovePosition(distanceSortedColliders.First().point);
+                    CheckGrounding();
+                }
             }
             else
             {
                 Debug.DrawRay(Rb.position, moveDelta * 100, Color.green);
             }
 
-            //Rb.MovePosition(Rb.position + moveDelta);
-            Vector3 movementDirection = Vector3.ProjectOnPlane(IntendedVelocity, Vector3.up);
-            if (movementDirection.IsApproximatelyVectorZero() == false)
+            Debug.DrawRay(Rb.position, Rb.velocity.x0z() * 100, Color.magenta);
+            if (IntendedVelocity.x0z().IsApproximatelyVectorZero() == false)
             {
-                Rb.MoveRotation(Quaternion.LookRotation(movementDirection));
-            }
+                Debug.Log(IntendedVelocity.x0z());
+                lookRotation = Quaternion.LookRotation(IntendedVelocity.x0z().normalized);
 
-            float distance = Vector3.Distance(lastPos, transform.position);
-            anim.SetFloat("ForwardMovementSpeed", distanceToForwardMovementSpeed.Evaluate(distance));
+            }
+            Rb.MoveRotation(lookRotation);
+
             lastPos = transform.position;
         }
     }

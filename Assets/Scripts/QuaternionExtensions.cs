@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PaladinCharacter
+namespace PaladinCharacter.Utility
 {
     public static class QuaternionExtensions
     {
