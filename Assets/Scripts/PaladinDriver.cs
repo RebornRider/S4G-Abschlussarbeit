@@ -3,14 +3,12 @@ using UnityEngine;
 
 namespace PaladinCharacter
 {
-    public class PaladinDriver : ActorDriver<PaladinInput, ThirdPersonCamera, CharacterMover>
+    public class PaladinDriver : ActorDriver<PaladinInput, ThirdPersonCamera, CharacterMover, PaladinAnimator>
     {
         [SerializeField]
         private float forwardSpeed = 1;
         [SerializeField]
         private float sidewardSpeed = 1;
-        [SerializeField]
-        protected PaladinAnimator Animator;
 
         public float JumpHeight = 2f;
         public float DashDistance = 5f;

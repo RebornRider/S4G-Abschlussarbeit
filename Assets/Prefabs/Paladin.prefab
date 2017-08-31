@@ -335,9 +335,9 @@ MonoBehaviour:
   Mover: {fileID: 114276160133918334}
   CameraRig: {fileID: 0}
   InputSource: {fileID: 114312219841894368}
+  Animator: {fileID: 114982255882892990}
   forwardSpeed: 100
   sidewardSpeed: 100
-  Animator: {fileID: 114982255882892990}
   JumpHeight: 10
   DashDistance: 2
   FallSpeed: 50
