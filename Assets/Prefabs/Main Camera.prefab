@@ -108,7 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputSource: {fileID: 114601909288706680}
   Anchor: {fileID: 0}
-  AnchorOffset: {x: 0, y: 2, z: 0}
+  AnchorOffset: {x: 0, y: 1, z: 0}
   radius: 4
   degreesPerSecond: 1
   invertPitch: 1

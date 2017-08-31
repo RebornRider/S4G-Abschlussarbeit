@@ -422,7 +422,7 @@ Prefab:
         type: 2}
       propertyPath: Anchor
       value: 
-      objectReference: {fileID: 1887457592}
+      objectReference: {fileID: 1971688436}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 76b788168ceb4854bbc6d379ba7050b2, type: 2}
   m_IsPrefabParent: 0
@@ -703,9 +703,9 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c60f6fee4c1c3d42a9be74f335364fd, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &1887457592 stripped
+--- !u!4 &1971688436 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 4370339756901752, guid: a142e41abd9b0d948a96bd33e33ccfee,
+  m_PrefabParentObject: {fileID: 4941201450334366, guid: a142e41abd9b0d948a96bd33e33ccfee,
     type: 2}
   m_PrefabInternal: {fileID: 257573164}
 --- !u!1001 &2061826746

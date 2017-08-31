@@ -13,6 +13,8 @@ namespace PaladinCharacter
         private string jumpButtonName = "Jump";
         [SerializeField]
         private string dashButtonName = "Fire3";
+        [SerializeField]
+        private string attackButtonName = "Fire1";
 
         public Vector2 GetMovementTwoAxis()
         {
@@ -27,6 +29,11 @@ namespace PaladinCharacter
         public bool WasDashPressed()
         {
             return Input.GetButtonDown(dashButtonName);
+        }
+
+        public bool WasAttackhPressed()
+        {
+            return Input.GetButtonDown(attackButtonName);
         }
     }
 }

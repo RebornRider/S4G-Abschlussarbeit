@@ -43,6 +43,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1703888814813686
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4941201450334366}
+  - component: {fileID: 114857643954869154}
+  m_Layer: 0
+  m_Name: CameraAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1797514202010296
 GameObject:
   m_ObjectHideFlags: 1
@@ -140,7 +156,8 @@ Transform:
     w: 1}
   m_LocalPosition: {x: -0.0003427926, y: 0.95579463, z: 0.0046594837}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4941201450334366}
   m_Father: {fileID: 4370339756901752}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -227,6 +244,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4370339756901752}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4941201450334366
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1703888814813686}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4144406089095426}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &54099937290904166
 Rigidbody:
@@ -321,6 +351,7 @@ MonoBehaviour:
   verticalMovementAxis: Vertical
   jumpButtonName: Jump
   dashButtonName: Fire3
+  attackButtonName: Fire1
 --- !u!114 &114617724019800172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -356,6 +387,18 @@ MonoBehaviour:
   verticalMovementAxis: Vertical
   jumpButtonName: Jump
   dashButtonName: Fire3
+  attackButtonName: Fire1
+--- !u!114 &114857643954869154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1703888814813686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd5e94fd963e6340a28d8700c0f47aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114982255882892990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -392,6 +435,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  AttackAnimCount: 0
 --- !u!136 &136943996185511510
 CapsuleCollider:
   m_ObjectHideFlags: 1

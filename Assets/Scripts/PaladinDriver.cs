@@ -16,6 +16,11 @@ namespace PaladinCharacter
 
         public void Update()
         {
+            if (InputSource.WasAttackhPressed())
+            {
+                Animator.Attack();
+            }
+
             if (InputSource.GetMovementTwoAxis().IsApproximatelyVectorZero() == false)
             {
                 Mover.SetIntendedVelocity(GetIntendedVelocity());
