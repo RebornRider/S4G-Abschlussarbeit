@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 616ebe3dce6fff245a9365564e6c96fa
-timeCreated: 1503908680
+guid: 40e5c7a5d4275dd46a8ec87c07fcbfaf
+timeCreated: 1504186890
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -159,7 +159,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 0
+    optimizeGameObjects: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -172,7 +172,8 @@ ModelImporter:
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
-    extraExposedTransformPaths: []
+    extraExposedTransformPaths:
+    - Alpha_Surface
     extraUserProperties: []
     clipAnimations: []
     isReadable: 1

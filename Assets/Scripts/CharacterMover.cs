@@ -15,13 +15,13 @@ namespace PaladinCharacter
         [SerializeField]
         protected Transform GroundChecker;
 
-        public override void Dash(float dashDistance)
+        public void Dash(float dashDistance)
         {
             Vector3 dashVelocity = Vector3.Scale(transform.forward, dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * Rb.drag + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * Rb.drag + 1)) / -Time.deltaTime)));
             Rb.AddForce(dashVelocity, ForceMode.VelocityChange);
         }
 
-        public override void Jump(float jumpHeight)
+        public void Jump(float jumpHeight)
         {
             Rb.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
         }

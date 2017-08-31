@@ -363,15 +363,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d63d1f94345d854e99b4318ffa86ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mover: {fileID: 114276160133918334}
-  CameraRig: {fileID: 0}
-  InputSource: {fileID: 114312219841894368}
   Animator: {fileID: 114982255882892990}
+  Mover: {fileID: 114276160133918334}
+  InputSource: {fileID: 114312219841894368}
+  CameraRig: {fileID: 0}
   forwardSpeed: 100
   sidewardSpeed: 100
-  JumpHeight: 10
-  DashDistance: 2
-  FallSpeed: 50
+  jumpHeight: 10
+  dashDistance: 2
+  fallSpeed: 50
 --- !u!114 &114845919964334344
 MonoBehaviour:
   m_ObjectHideFlags: 1

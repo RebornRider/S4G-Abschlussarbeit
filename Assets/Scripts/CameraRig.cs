@@ -30,7 +30,5 @@ namespace PaladinCharacter
             InputSource = InputSource ?? GetComponent<TInputSource>();
         }
 
-
-
     }
 }

@@ -3,16 +3,18 @@ using UnityEngine;
 
 namespace PaladinCharacter
 {
-    public class PaladinDriver : ActorDriver<PaladinInput, ThirdPersonCamera, CharacterMover, PaladinAnimator>
+    public class PaladinDriver : CharacterDriver<PaladinInput, ThirdPersonCamera, CharacterMover, PaladinAnimator>
     {
         [SerializeField]
-        private float forwardSpeed = 1;
+        private float forwardSpeed = 100.0f;
         [SerializeField]
-        private float sidewardSpeed = 1;
-
-        public float JumpHeight = 2f;
-        public float DashDistance = 5f;
-        public float FallSpeed = 50;
+        private float sidewardSpeed = 100.0f;
+        [SerializeField]
+        private float jumpHeight = 10.0f;
+        [SerializeField]
+        private float dashDistance = 2.0f;
+        [SerializeField]
+        private float fallSpeed = 50.0f;
 
         public void Update()
         {
@@ -20,7 +22,7 @@ namespace PaladinCharacter
             {
                 if (InputSource.WasAttackhPressed())
                 {
-                    Animator.Attack();
+                    Animator.AttackHandler();
                 }
 
                 if (InputSource.GetMovementTwoAxis().IsApproximatelyVectorZero() == false)
@@ -35,11 +37,11 @@ namespace PaladinCharacter
                 Mover.CheckGrounding();
                 if (InputSource.WasDashPressed() && Mover.IsGrounded)
                 {
-                    Mover.Dash(DashDistance);
+                    Mover.Dash(dashDistance);
                 }
                 if (InputSource.WasJumpPressed())
                 {
-                    Mover.Jump(JumpHeight);
+                    Mover.Jump(jumpHeight);
                 }
             }
             else
@@ -48,7 +50,7 @@ namespace PaladinCharacter
             }
         }
 
-        protected Vector3 GetIntendedVelocity()
+        private Vector3 GetIntendedVelocity()
         {
             Mover.CheckGrounding();
             if (Mover.IsGrounded)
@@ -63,7 +65,7 @@ namespace PaladinCharacter
             }
             else
             {
-                return Vector3.down * FallSpeed;
+                return Vector3.down * fallSpeed;
             }
         }
     }

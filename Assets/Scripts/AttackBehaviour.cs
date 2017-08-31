@@ -22,7 +22,7 @@ namespace PaladinCharacter
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             isAttacking = false;
-            OnAttackStarted(stateInfo.shortNameHash);
+            OnAttackEnded(stateInfo.shortNameHash);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace PaladinCharacter
                 distanceToForwardMovementSpeed.Evaluate(distance));
         }
 
-        public void Attack()
+        public void AttackHandler()
         {
             Animator.SetTrigger(ParameterNameToHash["OnAttack"]);
             Animator.SetFloat(ParameterNameToHash["AttackIndex"],

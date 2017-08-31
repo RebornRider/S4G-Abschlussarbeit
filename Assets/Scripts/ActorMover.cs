@@ -39,8 +39,7 @@ namespace PaladinCharacter
             IntendedVelocity = intendedVelocity;
         }
 
-        public abstract void Dash(float dashDistance);
-        public abstract void Jump(float jumpHeight);
         public abstract void CheckGrounding();
+
     }
 }
