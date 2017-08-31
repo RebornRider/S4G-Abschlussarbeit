@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PaladinCharacter
 {
-    public class ThirdPersonCamera : CameraRig
+    public class ThirdPersonCamera : CameraRig<ThirdPersonCameraInput>
     {
         // Keep us from going past the poles
         private const float MIN_PITCH = 10f;
@@ -45,7 +45,7 @@ namespace PaladinCharacter
 
         public void LateUpdate()
         {
-            Vector3 ofsettedAnchorPosition = Anchor.position + (Anchor.rotation * anchorOffset);
+            Vector3 ofsettedAnchorPosition = Anchor.position + (Anchor.rotation * AnchorOffset);
             Vector3 newCameraPosition = transform.position;
             Quaternion newCameraRotation = transform.rotation;
 
@@ -55,13 +55,13 @@ namespace PaladinCharacter
             Quaternion lInvTilt = QuaternionExtensions.FromToRotation(Anchor.up, Vector3.up);
 
             // Yaw is simple as we can go 360
-            Quaternion lYaw = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * degreesPerSecond,
+            Quaternion lYaw = Quaternion.AngleAxis(InputSource.GetCameraTwoAxis().x * degreesPerSecond,
                 lInvTilt * transform.up);
 
             // Pitch is more complicated since we can't go beyond the north/south pole
             float lPitchAngle = Vector3.Angle(toCameraDirection, lInvTilt * Anchor.up);
 
-            float lPitchDelta = (invertPitch ? -1f : 1f) * Input.GetAxis("Mouse Y");
+            float lPitchDelta = (invertPitch ? -1f : 1f) * InputSource.GetCameraTwoAxis().y;
             if (lPitchAngle < MIN_PITCH && lPitchDelta > 0f)
             {
                 lPitchDelta = 0f;

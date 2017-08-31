@@ -3,7 +3,12 @@ using UnityEngine;
 
 namespace PaladinCharacter
 {
-    public abstract class ActorAnimator : MonoBehaviour
+    public interface IActorAnimator
+    {
+
+    }
+
+    public abstract class ActorAnimator : MonoBehaviour, IActorAnimator
     {
         [SerializeField]
         protected Animator Animator;

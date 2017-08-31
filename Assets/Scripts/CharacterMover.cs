@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PaladinCharacter
 {
-    public class CharacterMover : ActorMover
+    public class CharacterMover : ActorMover<PaladinAnimator>
     {
         [SerializeField]
         protected LayerMask GroundLayers;
@@ -14,9 +14,6 @@ namespace PaladinCharacter
         protected float GroundSphereRadius = 0.4f;
         [SerializeField]
         protected Transform GroundChecker;
-        [SerializeField]
-        protected PaladinAnimator Animator;
-
 
         public override void Dash(float dashDistance)
         {

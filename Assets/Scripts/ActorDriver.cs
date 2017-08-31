@@ -2,23 +2,31 @@
 
 namespace PaladinCharacter
 {
-    public abstract class ActorDriver : MonoBehaviour
+    public interface IActorDriver
+    {
+
+    }
+
+    public abstract class ActorDriver<TInputSource, TCameraRig, TActorMover> : MonoBehaviour, IActorDriver
+        where TInputSource : MonoBehaviour, IInputSource
+        where TCameraRig : MonoBehaviour, ICameraRig
+        where TActorMover : MonoBehaviour, IActorMover
     {
         [SerializeField]
-        protected ActorMover Mover;
+        protected TActorMover Mover;
         [SerializeField]
-        protected CameraRig CameraRig;
+        protected TCameraRig CameraRig;
         [SerializeField]
-        protected InputSource InputSource;
+        protected TInputSource InputSource;
 
         protected virtual void Awake()
         {
-            InputSource = InputSource ?? GetComponent<InputSource>();
+            InputSource = InputSource ?? GetComponent<TInputSource>();
         }
 
         protected virtual void OnValidate()
         {
-            InputSource = InputSource ?? GetComponent<InputSource>();
+            InputSource = InputSource ?? GetComponent<TInputSource>();
         }
     }
 }

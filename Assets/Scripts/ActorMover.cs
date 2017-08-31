@@ -2,8 +2,16 @@
 
 namespace PaladinCharacter
 {
-    public abstract class ActorMover : MonoBehaviour
+    public interface IActorMover
     {
+
+    }
+
+    public abstract class ActorMover<TActorAnimator> : MonoBehaviour, IActorMover
+        where TActorAnimator : MonoBehaviour, IActorAnimator
+    {
+        [SerializeField]
+        protected TActorAnimator Animator;
         [SerializeField]
         protected Rigidbody Rb;
 
@@ -17,11 +25,13 @@ namespace PaladinCharacter
         protected virtual void Awake()
         {
             Rb = Rb ?? GetComponent<Rigidbody>();
+            Animator = Animator ?? GetComponent<TActorAnimator>();
         }
 
         protected virtual void OnValidate()
         {
             Rb = Rb ?? GetComponent<Rigidbody>();
+            Animator = Animator ?? GetComponent<TActorAnimator>();
         }
 
         public virtual void SetIntendedVelocity(Vector3 intendedVelocity)

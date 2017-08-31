@@ -298,6 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30cb05ce3b64e30aa73521dcdcebf8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Animator: {fileID: 114982255882892990}
   Rb: {fileID: 54099937290904166}
   GroundLayers:
     serializedVersion: 2
@@ -305,7 +306,6 @@ MonoBehaviour:
   GroundDistance: 0.1
   GroundSphereRadius: 0.4
   GroundChecker: {fileID: 4524643767763396}
-  Animator: {fileID: 114982255882892990}
 --- !u!114 &114312219841894368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -319,8 +319,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalMovementAxis: Horizontal
   verticalMovementAxis: Vertical
-  horizontalCameraAxis: Mouse X
-  verticalCameraAxis: Mouse Y
   jumpButtonName: Jump
   dashButtonName: Fire3
 --- !u!114 &114617724019800172
@@ -356,8 +354,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalMovementAxis: Horizontal
   verticalMovementAxis: Vertical
-  horizontalCameraAxis: Mouse X
-  verticalCameraAxis: Mouse Y
   jumpButtonName: Jump
   dashButtonName: Fire3
 --- !u!114 &114982255882892990

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PaladinCharacter
 {
-    public class PaladinDriver : ActorDriver
+    public class PaladinDriver : ActorDriver<PaladinInput, ThirdPersonCamera, CharacterMover>
     {
         [SerializeField]
         private float forwardSpeed = 1;
