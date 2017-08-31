@@ -11,6 +11,8 @@ namespace PaladinCharacter
         [SerializeField]
         protected float GroundDistance = 0.2f;
         [SerializeField]
+        protected float GroundSphereRadius = 0.4f;
+        [SerializeField]
         protected Transform GroundChecker;
         [SerializeField]
         protected PaladinAnimator Animator;
@@ -36,24 +38,48 @@ namespace PaladinCharacter
         private RaycastHit groundHit;
         public override void CheckGrounding()
         {
-            int hitCount = Physics.SphereCastNonAlloc(GroundChecker.position + Vector3.up * 0.01f, 0.01f, Vector3.down, results, GroundDistance + 0.01f,
-                GroundLayers.value, QueryTriggerInteraction.Ignore);
+            int hitCount = Physics.RaycastNonAlloc(new Ray(GroundChecker.position + Vector3.up * 0.01f, Vector3.down), results,
+                GroundDistance + 0.01f, GroundLayers.value, QueryTriggerInteraction.Ignore);
             if (hitCount > 0)
             {
                 var distanceSortedColliders = results
                     .Take(hitCount)
                     .Where(hit => hit.transform != null && hit.transform.gameObject != gameObject &&
+                                  hit.collider.isTrigger == false &&
                                   (GroundChecker.position.y - hit.point.y) > 0)
                     .OrderBy(hit => GroundChecker.position.y - hit.point.y);
+
                 isGrounded = distanceSortedColliders.Any();
                 if (isGrounded)
                 {
                     groundHit = distanceSortedColliders.First();
+                    Debug.DrawRay(groundHit.point, groundHit.normal * 10);
                 }
             }
             else
             {
                 isGrounded = false;
+
+                Vector3 sphereTarget = GroundChecker.position + Vector3.up * GroundSphereRadius;
+                Vector3 sphereOrigin = sphereTarget + Vector3.up * GroundSphereRadius;
+                int sphereHitCount = Physics.SphereCastNonAlloc(new Ray(sphereOrigin, Vector3.down), GroundSphereRadius, results, GroundSphereRadius + 0.01f, GroundLayers.value, QueryTriggerInteraction.Ignore);
+                if (sphereHitCount > 0)
+                {
+                    var distanceSortedColliders = results
+                        .Take(sphereHitCount)
+                        .Where(hit => hit.transform != null && hit.transform.gameObject != gameObject &&
+                                      hit.collider.isTrigger == false &&
+                                      (sphereTarget.y - hit.point.y) > 0)
+                        .OrderBy(hit => sphereTarget.y - hit.point.y);
+
+                    isGrounded = distanceSortedColliders.Any();
+                    if (isGrounded)
+                    {
+                        groundHit = distanceSortedColliders.First();
+                        Debug.DrawRay(groundHit.point, groundHit.normal * 10);
+                    }
+
+                }
             }
 
 
@@ -78,6 +104,7 @@ namespace PaladinCharacter
                     var distanceSortedColliders = results
                         .Take(hitCount)
                         .Where(hit => hit.transform != null && hit.transform.gameObject != gameObject &&
+                                      hit.collider.isTrigger == false &&
                                       (GroundChecker.position.y - hit.point.y) > 0)
                         .OrderBy(hit => GroundChecker.position.y - hit.point.y);
 
