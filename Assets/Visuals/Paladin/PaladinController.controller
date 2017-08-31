@@ -39,6 +39,17 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!114 &114312624413891442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa2f36e88f4485eade81467873d700f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!206 &206360589940905760
 BlendTree:
   m_ObjectHideFlags: 1
@@ -55,16 +66,8 @@ BlendTree:
     m_DirectBlendParameter: ForwardMovementSpeed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: a26ed0bddfb2b59498c01272f3e18a51, type: 3}
+    m_Motion: {fileID: 7400000, guid: 1a4f60713c9d2cf4c8ad9495c9b6e198, type: 3}
     m_Threshold: 1
-    m_Position: {x: 0, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: ForwardMovementSpeed
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 65676614616695e4b83493f926fcfc8b, type: 3}
-    m_Threshold: 2
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -73,7 +76,7 @@ BlendTree:
   m_BlendParameter: AttackIndex
   m_BlendParameterY: ForwardMovementSpeed
   m_MinThreshold: 0
-  m_MaxThreshold: 2
+  m_MaxThreshold: 1
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -195,7 +198,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101930793943347614}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114312624413891442}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

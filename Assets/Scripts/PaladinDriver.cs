@@ -16,28 +16,35 @@ namespace PaladinCharacter
 
         public void Update()
         {
-            if (InputSource.WasAttackhPressed())
+            if (Animator.AttackBehaviour.IsAttacking == false)
             {
-                Animator.Attack();
-            }
+                if (InputSource.WasAttackhPressed())
+                {
+                    Animator.Attack();
+                }
 
-            if (InputSource.GetMovementTwoAxis().IsApproximatelyVectorZero() == false)
-            {
-                Mover.SetIntendedVelocity(GetIntendedVelocity());
+                if (InputSource.GetMovementTwoAxis().IsApproximatelyVectorZero() == false)
+                {
+                    Mover.SetIntendedVelocity(GetIntendedVelocity());
+                }
+                else
+                {
+                    Mover.SetIntendedVelocity(Vector3.zero);
+                }
+
+                Mover.CheckGrounding();
+                if (InputSource.WasDashPressed() && Mover.IsGrounded)
+                {
+                    Mover.Dash(DashDistance);
+                }
+                if (InputSource.WasJumpPressed())
+                {
+                    Mover.Jump(JumpHeight);
+                }
             }
             else
             {
                 Mover.SetIntendedVelocity(Vector3.zero);
-            }
-
-            Mover.CheckGrounding();
-            if (InputSource.WasDashPressed() && Mover.IsGrounded)
-            {
-                Mover.Dash(DashDistance);
-            }
-            if (InputSource.WasJumpPressed())
-            {
-                Mover.Jump(JumpHeight);
             }
         }
 

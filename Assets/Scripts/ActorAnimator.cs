@@ -12,7 +12,7 @@ namespace PaladinCharacter
     {
         [SerializeField]
         protected Animator Animator;
-        protected readonly Dictionary<string, int> parameterNameToHash = new Dictionary<string, int>();
+        protected readonly Dictionary<string, int> ParameterNameToHash = new Dictionary<string, int>();
 
         protected virtual void Awake()
         {
@@ -22,10 +22,10 @@ namespace PaladinCharacter
 
         private void PopulateParameterHashCache()
         {
-            parameterNameToHash.Clear();
+            ParameterNameToHash.Clear();
             for (var i = 0; i < Animator.parameters.Length; i++)
             {
-                parameterNameToHash.Add(Animator.GetParameter(i).name, Animator.GetParameter(i).nameHash);
+                ParameterNameToHash.Add(Animator.GetParameter(i).name, Animator.GetParameter(i).nameHash);
             }
         }
 

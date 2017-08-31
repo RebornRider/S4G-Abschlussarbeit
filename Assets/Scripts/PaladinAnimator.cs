@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace PaladinCharacter
 {
@@ -7,19 +8,32 @@ namespace PaladinCharacter
         [SerializeField]
         protected AnimationCurve distanceToForwardMovementSpeed;
         [SerializeField]
-        protected int AttackAnimCount;
+        protected int AttackAnimCount = 2;
+
+        private AttackBehaviour attackBehaviour;
+
+        public AttackBehaviour AttackBehaviour
+        {
+            get { return attackBehaviour; }
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            attackBehaviour = Animator.GetBehaviour<AttackBehaviour>();
+        }
 
         public void SetMovementDistance(float distance)
         {
-            Animator.SetFloat(parameterNameToHash["ForwardMovementSpeed"],
+            Animator.SetFloat(ParameterNameToHash["ForwardMovementSpeed"],
                 distanceToForwardMovementSpeed.Evaluate(distance));
         }
 
         public void Attack()
         {
-            Animator.SetTrigger(parameterNameToHash["OnAttack"]);
-            Animator.SetFloat(parameterNameToHash["AttackIndex"],
-                Random.Range(0, 4));
+            Animator.SetTrigger(ParameterNameToHash["OnAttack"]);
+            Animator.SetFloat(ParameterNameToHash["AttackIndex"],
+                Random.Range(0, AttackAnimCount));
         }
     }
 }
