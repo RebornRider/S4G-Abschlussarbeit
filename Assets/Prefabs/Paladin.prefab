@@ -317,8 +317,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a8e4d146f44a558c495a4e95875e29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalAxisName: Horizontal
-  verticalAxisName: Vertical
+  horizontalMovementAxis: Horizontal
+  verticalMovementAxis: Vertical
+  horizontalCameraAxis: Mouse X
+  verticalCameraAxis: Mouse Y
   jumpButtonName: Jump
   dashButtonName: Fire3
 --- !u!114 &114617724019800172
@@ -352,8 +354,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a8e4d146f44a558c495a4e95875e29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalAxisName: Horizontal
-  verticalAxisName: Vertical
+  horizontalMovementAxis: Horizontal
+  verticalMovementAxis: Vertical
+  horizontalCameraAxis: Mouse X
+  verticalCameraAxis: Mouse Y
   jumpButtonName: Jump
   dashButtonName: Fire3
 --- !u!114 &114982255882892990
