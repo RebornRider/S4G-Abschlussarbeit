@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace PaladinCharacter
 {
-    public class EnemyDriver : ActorDriver<InputSourceStub, ActorMoverStub, EnemyAnimator>, IHittable
+    public class EnemyDriver : ActorDriver<InputSourceStub, ActorMoverStub, EnemyAnimator>
     {
         [SerializeField]
         private float fallSpeed = 50.0f;
@@ -32,14 +32,10 @@ namespace PaladinCharacter
             }
         }
 
-        public void HitHandler()
+        public void HitHandler(float damage = 0)
         {
+            Debug.Log("Damaged: " + damage);
             Animator.HitHandler();
         }
-    }
-
-    public interface IHittable
-    {
-        void HitHandler();
     }
 }

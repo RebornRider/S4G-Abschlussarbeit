@@ -15,6 +15,9 @@ namespace PaladinCharacter
         private float dashDistance = 2.0f;
         [SerializeField]
         private float fallSpeed = 50.0f;
+        [SerializeField]
+        private SwordDriver swordDriver;
+
 
         public void Update()
         {
@@ -22,7 +25,7 @@ namespace PaladinCharacter
             {
                 if (InputSource.WasAttackhPressed())
                 {
-                    Animator.AttackHandler();
+                    StartAttacking();
                 }
 
                 if (InputSource.GetMovementTwoAxis().IsApproximatelyVectorZero() == false)
@@ -48,6 +51,19 @@ namespace PaladinCharacter
             {
                 Mover.SetIntendedVelocity(Vector3.zero);
             }
+        }
+
+        private void StartAttacking()
+        {
+            Animator.AttackHandler();
+            swordDriver.AttackStartHandler();
+            Animator.AttackBehaviour.OnAttackEnded += AttackEndedHandler;
+        }
+
+        private void AttackEndedHandler(int stateInfoHash)
+        {
+            Animator.AttackBehaviour.OnAttackEnded -= AttackEndedHandler;
+            swordDriver.AttackEndHandler();
         }
 
         private Vector3 GetIntendedVelocity()

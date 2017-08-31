@@ -34,9 +34,4 @@ namespace PaladinCharacter
             Animator = Animator ?? GetComponent<Animator>();
         }
     }
-
-    public class ActorAnimatorStub : ActorAnimator
-    {
-
-    }
 }
