@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,21 +10,46 @@ namespace PaladinCharacter
         private float minDamage = 50.0f;
         [SerializeField]
         private float maxDamage = 100.0f;
+        [SerializeField]
+        private AudioClip impactSound;
+        [SerializeField]
+        private AudioClip swingSound;
 
         private readonly List<EnemyDriver> alreadyHit = new List<EnemyDriver>();
 
-        private bool isAttcking;
+        private AudioSource audioSource;
+        private bool isAttacking;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            audioSource = GetComponent<AudioSource>();
+        }
+
+        private Coroutine attackSoundCoroutine;
         public void AttackStartHandler()
         {
             alreadyHit.Clear();
-            isAttcking = true;
+            isAttacking = true;
+
+            if (attackSoundCoroutine != null)
+            {
+                StopCoroutine(attackSoundCoroutine);
+            }
+
+            attackSoundCoroutine = StartCoroutine(PlayAttckSound());
+        }
+
+        private IEnumerator PlayAttckSound()
+        {
+            yield return new WaitForSeconds(0.2f);
+            audioSource.PlayOneShot(swingSound);
         }
 
         public void AttackEndHandler()
         {
             alreadyHit.Clear();
-            isAttcking = false;
+            isAttacking = false;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -38,7 +64,7 @@ namespace PaladinCharacter
 
         private void HandleCollision(Collider other)
         {
-            if (isAttcking == false)
+            if (isAttacking == false)
             {
                 return;
             }
@@ -49,6 +75,7 @@ namespace PaladinCharacter
             {
                 alreadyHit.Add(enemy);
                 enemy.HitHandler(Random.Range(minDamage, maxDamage));
+                AudioSource.PlayClipAtPoint(impactSound, transform.position);
             }
         }
     }

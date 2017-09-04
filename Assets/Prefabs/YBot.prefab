@@ -146,6 +146,15 @@ MonoBehaviour:
   Mover: {fileID: 114944667371671800}
   InputSource: {fileID: 114153698193507236}
   fallSpeed: 50
+  damagePopupPrefab: {fileID: 1824558053372986, guid: 8b451d1370de58f4d8ffc1a6b158d584,
+    type: 2}
+  damagePopUpPivot: {x: 0, y: 1.8, z: 0}
+  minDamagePopupRandomOffset: 0.3
+  maxDamagePopupRandomOffset: 0.6
+  minDamageColor: {r: 0, g: 1, b: 0, a: 1}
+  maxDamageColor: {r: 1, g: 0, b: 0, a: 1}
+  minDamage: 50
+  maxDamage: 100
 --- !u!114 &114944667371671800
 MonoBehaviour:
   m_ObjectHideFlags: 1

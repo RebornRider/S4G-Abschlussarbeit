@@ -809,12 +809,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114923466004245120, guid: 372571f4485e10d42a2de4b2a8088742,
-        type: 2}
-      propertyPath: damagePopupPrefab
-      value: 
-      objectReference: {fileID: 1824558053372986, guid: 8b451d1370de58f4d8ffc1a6b158d584,
-        type: 2}
+    - target: {fileID: 1926977788007364, guid: 372571f4485e10d42a2de4b2a8088742, type: 2}
+      propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 372571f4485e10d42a2de4b2a8088742, type: 2}
   m_IsPrefabParent: 0

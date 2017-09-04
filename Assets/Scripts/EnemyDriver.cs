@@ -6,10 +6,8 @@ namespace PaladinCharacter
     {
         [SerializeField]
         private float fallSpeed = 50.0f;
-
         [SerializeField]
         private GameObject damagePopupPrefab;
-
         [SerializeField]
         private Vector3 damagePopUpPivot = new Vector3(0, 1.8f, 0);
         [SerializeField]
@@ -67,6 +65,7 @@ namespace PaladinCharacter
                     .SetLifeTime(0.75f)
                     .Show();
             }
+
         }
 
         private Vector3 CalculateRandomUpwardsDirectionOnUnitSphere()
