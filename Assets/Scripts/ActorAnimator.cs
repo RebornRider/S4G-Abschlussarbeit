@@ -23,6 +23,12 @@ namespace PaladinCharacter
         private void PopulateParameterHashCache()
         {
             ParameterNameToHash.Clear();
+
+            if (Animator.runtimeAnimatorController == null)
+            {
+                return;
+            }
+
             for (var i = 0; i < Animator.parameters.Length; i++)
             {
                 ParameterNameToHash.Add(Animator.GetParameter(i).name, Animator.GetParameter(i).nameHash);
