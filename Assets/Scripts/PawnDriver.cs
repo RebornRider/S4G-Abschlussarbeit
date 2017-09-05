@@ -2,12 +2,22 @@
 
 namespace PaladinCharacter
 {
-    public interface IActorDriver
+    public interface IActor
     {
 
     }
 
-    public abstract class ActorDriver<TInputSource, TActorMover, TActorAnimator> : MonoBehaviour, IActorDriver
+    public abstract class Actor : MonoBehaviour, IActor
+    {
+
+    }
+
+    public interface IPawnDriver
+    {
+
+    }
+
+    public abstract class PawnDriver<TInputSource, TActorMover, TActorAnimator> : Actor, IPawnDriver
         where TInputSource : MonoBehaviour, IInputSource
         where TActorMover : MonoBehaviour, IActorMover
         where TActorAnimator : MonoBehaviour, IActorAnimator

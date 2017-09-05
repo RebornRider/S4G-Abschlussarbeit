@@ -24,6 +24,7 @@ namespace PaladinCharacter
         public void Jump(float jumpHeight)
         {
             Rb.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+            Animator.JumpHandler();
         }
 
         public virtual void Update()
@@ -92,7 +93,7 @@ namespace PaladinCharacter
             Animator.SetMovementDistance(distance);
             CheckGrounding();
 
-            if (Mathf.Abs(moveDelta.x) + Mathf.Abs(moveDelta.z) > 0.001)
+            if (moveDelta.sqrMagnitude > 0.001)
             {
                 int hitCount = Physics.RaycastNonAlloc(new Ray(GroundChecker.position + Vector3.up * 0.01f, Vector3.down), results,
                     GroundDistance + 0.01f, GroundLayers.value, QueryTriggerInteraction.Ignore);
@@ -116,11 +117,17 @@ namespace PaladinCharacter
                 {
                     moveDelta = Vector3.ProjectOnPlane(moveDelta, groundHit.normal);
                 }
+
                 Rb.velocity += moveDelta;
                 Debug.DrawRay(Rb.position, moveDelta * 100, Color.red);
             }
             else
             {
+                if (isGrounded == false)
+                {
+                    Debug.Log(moveDelta);
+                }
+                Rb.velocity += moveDelta;
                 Debug.DrawRay(Rb.position, moveDelta * 100, Color.green);
             }
 
@@ -131,6 +138,7 @@ namespace PaladinCharacter
 
             }
             Rb.MoveRotation(lookRotation);
+            Animator.SetGrounding(isGrounded);
 
             lastPos = transform.position;
         }

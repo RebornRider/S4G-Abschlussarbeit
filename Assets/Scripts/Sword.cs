@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PaladinCharacter
 {
-    public class SwordDriver : ActorDriver<InputSourceStub, ActorMoverStub, ActorAnimatorStub>
+    public class Sword : Actor
     {
         [SerializeField]
         private float minDamage = 50.0f;
@@ -20,9 +20,8 @@ namespace PaladinCharacter
         private AudioSource audioSource;
         private bool isAttacking;
 
-        protected override void Awake()
+        protected void Awake()
         {
-            base.Awake();
             audioSource = GetComponent<AudioSource>();
         }
 
@@ -43,6 +42,7 @@ namespace PaladinCharacter
         private IEnumerator PlayAttckSound()
         {
             yield return new WaitForSeconds(0.2f);
+            audioSource.Stop();
             audioSource.PlayOneShot(swingSound);
         }
 
@@ -70,13 +70,14 @@ namespace PaladinCharacter
             }
 
             var enemy = other.gameObject.GetComponent<EnemyDriver>();
-
-            if (enemy != null && alreadyHit.Contains(enemy) == false)
+            if (enemy == null || alreadyHit.Contains(enemy))
             {
-                alreadyHit.Add(enemy);
-                enemy.HitHandler(Random.Range(minDamage, maxDamage));
-                AudioSource.PlayClipAtPoint(impactSound, transform.position);
+                return;
             }
+
+            alreadyHit.Add(enemy);
+            enemy.HitHandler(Random.Range(minDamage, maxDamage));
+            AudioSource.PlayClipAtPoint(impactSound, transform.position);
         }
     }
 }

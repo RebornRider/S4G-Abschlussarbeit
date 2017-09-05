@@ -1,5 +1,4 @@
-﻿using PaladinCharacter.Utility;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace PaladinCharacter
 {
@@ -16,33 +15,27 @@ namespace PaladinCharacter
         [SerializeField]
         private float fallSpeed = 50.0f;
         [SerializeField]
-        private SwordDriver swordDriver;
+        private Sword sword;
 
 
         public void Update()
         {
             if (Animator.AttackBehaviour.IsAttacking == false)
             {
-                if (InputSource.WasAttackhPressed())
+                if (InputSource.WasAttackhPressed() && Mover.IsGrounded)
                 {
                     StartAttacking();
                 }
 
-                if (InputSource.GetMovementTwoAxis().IsApproximatelyVectorZero() == false)
-                {
-                    Mover.SetIntendedVelocity(GetIntendedVelocity());
-                }
-                else
-                {
-                    Mover.SetIntendedVelocity(Vector3.zero);
-                }
+                Mover.SetIntendedVelocity(GetIntendedVelocity());
+
 
                 Mover.CheckGrounding();
                 if (InputSource.WasDashPressed() && Mover.IsGrounded)
                 {
                     Mover.Dash(dashDistance);
                 }
-                if (InputSource.WasJumpPressed())
+                if (InputSource.WasJumpPressed() && Mover.IsGrounded)
                 {
                     Mover.Jump(jumpHeight);
                 }
@@ -56,19 +49,18 @@ namespace PaladinCharacter
         private void StartAttacking()
         {
             Animator.AttackHandler();
-            swordDriver.AttackStartHandler();
+            sword.AttackStartHandler();
             Animator.AttackBehaviour.OnAttackEnded += AttackEndedHandler;
         }
 
         private void AttackEndedHandler(int stateInfoHash)
         {
             Animator.AttackBehaviour.OnAttackEnded -= AttackEndedHandler;
-            swordDriver.AttackEndHandler();
+            sword.AttackEndHandler();
         }
 
         private Vector3 GetIntendedVelocity()
         {
-            Mover.CheckGrounding();
             if (Mover.IsGrounded)
             {
                 var forwardMovement = Vector3.ProjectOnPlane(CameraRig.transform.forward * InputSource.GetMovementTwoAxis().y * forwardSpeed, Vector3.up);

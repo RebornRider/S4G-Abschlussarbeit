@@ -187,7 +187,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1916755701986244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.16, y: 1.19, z: 5.76}
+  m_LocalPosition: {x: -3.9965, y: 0.000042915, z: 3.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4144406089095426}
@@ -431,9 +431,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab0ac5b03f54f49bfeadfb822edb675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: 114699992024362006}
-  Mover: {fileID: 114667268717086208}
-  InputSource: {fileID: 114707686841323742}
   minDamage: 50
   maxDamage: 100
   impactSound: {fileID: 8300000, guid: ab2a3c96f9aab06449d4507fd030dfd1, type: 3}
@@ -493,7 +490,7 @@ MonoBehaviour:
   jumpHeight: 10
   dashDistance: 2
   fallSpeed: 50
-  swordDriver: {fileID: 114078791416608352}
+  sword: {fileID: 114078791416608352}
 --- !u!114 &114667268717086208
 MonoBehaviour:
   m_ObjectHideFlags: 1

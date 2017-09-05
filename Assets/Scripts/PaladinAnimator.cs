@@ -29,6 +29,17 @@ namespace PaladinCharacter
                 distanceToForwardMovementSpeed.Evaluate(distance));
         }
 
+        public void JumpHandler()
+        {
+            Animator.SetTrigger(ParameterNameToHash["OnJump"]);
+        }
+
+        public void SetGrounding(bool isGrounded)
+        {
+            Animator.SetBool(ParameterNameToHash["isGrounded"], isGrounded);
+        }
+
+
         public void AttackHandler()
         {
             Animator.SetTrigger(ParameterNameToHash["OnAttack"]);

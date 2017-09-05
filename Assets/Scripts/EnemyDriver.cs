@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace PaladinCharacter
 {
-    public class EnemyDriver : ActorDriver<InputSourceStub, ActorMoverStub, EnemyAnimator>
+    public class EnemyDriver : PawnDriver<InputSourceStub, ActorMoverStub, EnemyAnimator>
     {
         [SerializeField]
         private float fallSpeed = 50.0f;
