@@ -325,11 +325,6 @@ Prefab:
       propertyPath: CameraRig
       value: 
       objectReference: {fileID: 1473243145}
-    - target: {fileID: 114617724019800172, guid: a142e41abd9b0d948a96bd33e33ccfee,
-        type: 2}
-      propertyPath: fallSpeed
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a142e41abd9b0d948a96bd33e33ccfee, type: 2}
   m_IsPrefabParent: 0
