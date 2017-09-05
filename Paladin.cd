@@ -1,42 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="PaladinCharacter.PaladinDriver" Collapsed="true">
-    <Position X="10.5" Y="6" Width="4.75" />
+    <Position X="0.5" Y="10.5" Width="4.75" />
     <TypeIdentifier>
       <HashCode>gAQAEAAAAAAAAAAAAAIEIAAAAADAAAAAAAAAAABAAAI=</HashCode>
       <FileName>Assets\Scripts\PaladinDriver.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PaladinCharacter.PaladinInput" Collapsed="true">
-    <Position X="15.75" Y="3.5" Width="1.5" />
+    <Position X="3.75" Y="5.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAKAAAAgAAgAAAAAAAAAAAAEAAEAAAAAIAAACAQAAAA=</HashCode>
       <FileName>Assets\Scripts\PaladinInput.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PaladinCharacter.ThirdPersonCamera" Collapsed="true">
-    <Position X="7.75" Y="3.5" Width="2.25" />
+    <Position X="3.75" Y="3" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AgAAAAAgCAAAAABABAAAIAAAAAAAAAQAAAQAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\ThirdPersonCamera.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PaladinCharacter.CharacterMover" Collapsed="true">
-    <Position X="4.75" Y="3.5" Width="2.25" />
+    <Position X="0.75" Y="3" Width="2.25" />
     <TypeIdentifier>
       <HashCode>gAQAAAAAAgAAAAAAAAIACAAACAAAAQggAEAAAACAAQA=</HashCode>
       <FileName>Assets\Scripts\CharacterMover.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PaladinCharacter.PaladinAnimator" Collapsed="true">
-    <Position X="18" Y="3.5" Width="1.5" />
+    <Position X="1.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAAACAAQAAAQAAAEAAAACAAAAAAAEA=</HashCode>
+      <HashCode>AAAAAAAAAAAAgAAAACAAQIAAQAAAEAAAACAAAAAAAEQ=</HashCode>
       <FileName>Assets\Scripts\PaladinAnimator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PaladinCharacter.ActorAnimator" Collapsed="true">
-    <Position X="18" Y="2" Width="1.5" />
+    <Position X="1.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQAAAAAAAgAAEAAAAAAAAAAAAAAAAAAAQAAEA=</HashCode>
       <FileName>Assets\Scripts\ActorAnimator.cs</FileName>
@@ -44,11 +44,11 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
-    <Position X="12" Y="0.5" Width="1.75" />
+    <Position X="2.5" Y="0.5" Width="1.75" />
     <TypeIdentifier />
   </Class>
   <Class Name="PaladinCharacter.InputSource" Collapsed="true">
-    <Position X="15.75" Y="2" Width="1.5" />
+    <Position X="4.5" Y="4.25" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\InputSource.cs</FileName>
@@ -56,7 +56,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="PaladinCharacter.CameraRig&lt;TInputSource&gt;" Collapsed="true">
-    <Position X="7.75" Y="2" Width="2.25" />
+    <Position X="3.75" Y="1.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAAAAAAAAAACEAAAAAAAAAAAAAAQAAAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\CameraRig.cs</FileName>
@@ -64,7 +64,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="PaladinCharacter.ActorMover&lt;TActorAnimator&gt;" Collapsed="true">
-    <Position X="4.75" Y="2" Width="2.25" />
+    <Position X="0.75" Y="1.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAAAAMABAAAAAAAAAAIAAAACCQAAEA=</HashCode>
       <FileName>Assets\Scripts\ActorMover.cs</FileName>
@@ -72,7 +72,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="PaladinCharacter.CharacterDriver&lt;TInputSource, TCameraRig, TActorMover, TActorAnimator&gt;" Collapsed="true">
-    <Position X="10.5" Y="4.75" Width="4.75" />
+    <Position X="0.5" Y="9.25" Width="4.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\CharacterDriver.cs</FileName>
@@ -80,7 +80,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="PaladinCharacter.PawnDriver&lt;TInputSource, TActorMover, TActorAnimator&gt;" Collapsed="true">
-    <Position X="11" Y="3.5" Width="3.75" />
+    <Position X="1" Y="8" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAAAAAAAAAAEAAAAAAAAAAAAAAQAAAAQAAEA=</HashCode>
       <FileName>Assets\Scripts\PawnDriver.cs</FileName>
@@ -88,12 +88,26 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="PaladinCharacter.Actor" Collapsed="true">
-    <Position X="12" Y="2" Width="1.75" />
+    <Position X="2.5" Y="6.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\PawnDriver.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PaladinCharacter.ThirdPersonCameraInput" Collapsed="true">
+    <Position X="5.25" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAGAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ThirdPersonCameraInput.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PaladinCharacter.Sword" Collapsed="true">
+    <Position X="5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAQAAAAAAAAAJAIAAAIAAIAAAAAEAUEQAAAACAACEA=</HashCode>
+      <FileName>Assets\Scripts\Sword.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
