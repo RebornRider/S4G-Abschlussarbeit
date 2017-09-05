@@ -64,7 +64,7 @@ LightmapSettings:
     m_CompAOExponent: 1
     m_CompAOExponentDirect: 0
     m_Padding: 2
-    m_LightmapParameters: {fileID: 15201, guid: 0000000000000000f000000000000000,
+    m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000,
       type: 0}
     m_LightmapsBakeMode: 0
     m_TextureCompression: 1
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousColorSigma: 1
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
-  m_LightingDataAsset: {fileID: 112000006, guid: 20473d4053ba0c441ab9b75e4b4dc608,
+  m_LightingDataAsset: {fileID: 112000002, guid: 49d6171099f01664f8e2f3c6f508e86f,
     type: 2}
   m_UseShadowmask: 0
 --- !u!196 &4
