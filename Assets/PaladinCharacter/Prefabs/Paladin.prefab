@@ -112,7 +112,6 @@ GameObject:
   - component: {fileID: 114617724019800172}
   - component: {fileID: 114982255882892990}
   - component: {fileID: 114845919964334344}
-  - component: {fileID: 114312219841894368}
   m_Layer: 0
   m_Name: Paladin
   m_TagString: Untagged
@@ -454,22 +453,6 @@ MonoBehaviour:
   GroundDistance: 0.1
   GroundSphereRadius: 0.4
   GroundChecker: {fileID: 4524643767763396}
---- !u!114 &114312219841894368
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1916755701986244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54a8e4d146f44a558c495a4e95875e29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  horizontalMovementAxis: Horizontal
-  verticalMovementAxis: Vertical
-  jumpButtonName: Jump
-  dashButtonName: Fire3
-  attackButtonName: Fire1
 --- !u!114 &114617724019800172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -483,7 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 114982255882892990}
   Mover: {fileID: 114276160133918334}
-  InputSource: {fileID: 114312219841894368}
+  InputSource: {fileID: 114845919964334344}
   CameraRig: {fileID: 0}
   forwardSpeed: 100
   sidewardSpeed: 100

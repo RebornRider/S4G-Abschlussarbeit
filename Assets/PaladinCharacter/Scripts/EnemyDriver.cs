@@ -1,3 +1,4 @@
+using PaladinCharacter.Utility;
 using UnityEngine;
 
 namespace PaladinCharacter
