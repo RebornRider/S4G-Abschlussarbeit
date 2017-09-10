@@ -20,6 +20,14 @@ namespace PaladinCharacter
         [SerializeField]
         protected Vector3 AnchorOffset = new Vector3(0f, 2f, 0f);
 
+        protected Vector3 OffsettedAnchorPosition
+        {
+            get
+            {
+                return Anchor.position + Anchor.rotation * AnchorOffset;
+            }
+        }
+
         protected virtual void Awake()
         {
             InputSource = InputSource ?? GetComponent<TInputSource>();

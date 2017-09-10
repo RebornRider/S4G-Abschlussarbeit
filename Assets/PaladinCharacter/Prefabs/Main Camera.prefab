@@ -109,9 +109,11 @@ MonoBehaviour:
   InputSource: {fileID: 114601909288706680}
   Anchor: {fileID: 0}
   AnchorOffset: {x: 0, y: 1, z: 0}
-  radius: 4
-  degreesPerSecond: 1
+  degreesPerTick: 1
   invertPitch: 1
+  maxPitch: 135
+  minPitch: 45
+  radius: 4
 --- !u!114 &114601909288706680
 MonoBehaviour:
   m_ObjectHideFlags: 1

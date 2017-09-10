@@ -5,96 +5,97 @@ namespace PaladinCharacter
 {
     public class ThirdPersonCamera : CameraRig<ThirdPersonCameraInput>
     {
-        // Keep us from going past the poles
-        private const float MIN_PITCH = 10f;
-        private const float MAX_PITCH = 170f;
-
         /// <summary>
-        /// Radius of the orbit
+        ///     Speed we'll actually apply to the rotation. This is essencially the
+        ///     number of degrees per tick assuming we're running at 60 FPS
         /// </summary>
         [SerializeField]
-        private float radius = 4f;
-
-
-        /// <summary>
-        /// Speed we'll actually apply to the rotation. This is essencially the
-        /// number of degrees per tick assuming we're running at 60 FPS
-        /// </summary>
-        [SerializeField]
-        private float degreesPerSecond = 1f;
+        private float degreesPerTick = 1f;
 
         /// <summary>
-        /// Determines if we invert the pitch information we get from the input
+        ///     Determines if we invert the pitch information we get from the input
         /// </summary>
         [SerializeField]
         private bool invertPitch = true;
 
-
         /// <summary>
-        /// Represents the "pole" that the camera is attched to the anchor with. This pole
-        /// is the direction from the anchor to the camera (in natural "up" space)
+        ///     Keep us from going past the north pole
         /// </summary>
-        private Vector3 toCameraDirection = Vector3.back;
+        [SerializeField]
+        [Range(90, 180)]
+        private float maxPitch = 170f;
 
         /// <summary>
-        /// We keep track of the tilt so we can make small changes to it as the actor rotates.
-        /// This is safter than trying to do a full rotation all at once which can cause odd
-        /// rotations as we hit 180 degrees.
+        ///     Keep us from going past the south pole
+        /// </summary>
+        [SerializeField]
+        [Range(0, 90)]
+        private float minPitch = 10f;
+
+        /// <summary>
+        ///     Radius of the orbit
+        /// </summary>
+        [SerializeField]
+        private float radius = 4f;
+
+        /// <summary>
+        ///     We keep track of the tilt so we can make small changes to it as the actor rotates.
+        ///     This is safter than trying to do a full rotation all at once which can cause odd
+        ///     rotations as we hit 180 degrees.
         /// </summary>
         private Quaternion tilt = Quaternion.identity;
 
+
+        /// <summary>
+        ///     Represents the "pole" that the camera is attched to the anchor with. This pole
+        ///     is the direction from the anchor to the camera (in natural "up" space)
+        /// </summary>
+        private Vector3 toCameraDirection = Vector3.back;
+
         public void LateUpdate()
         {
-            Vector3 ofsettedAnchorPosition = Anchor.position + (Anchor.rotation * AnchorOffset);
-            Vector3 newCameraPosition = transform.position;
-            Quaternion newCameraRotation = transform.rotation;
-
-            //if (mInputSource.IsViewingActivated)
             // Grab the rotation amount. We do the inverse tilt so we calculate the rotation in
             // "natural up" space. Later we'll use the tilt to put it back into "anchor up" space.
-            Quaternion lInvTilt = QuaternionExtensions.FromToRotation(Anchor.up, Vector3.up);
+            Quaternion invTilt = QuaternionExtensions.FromToRotation(Anchor.up, Vector3.up);
 
             // Yaw is simple as we can go 360
-            Quaternion lYaw = Quaternion.AngleAxis(InputSource.GetCameraTwoAxis().x * degreesPerSecond,
-                lInvTilt * transform.up);
+            Quaternion yaw = Quaternion.AngleAxis(InputSource.GetCameraTwoAxis().x * degreesPerTick,
+                invTilt * transform.up);
 
             // Pitch is more complicated since we can't go beyond the north/south pole
-            float lPitchAngle = Vector3.Angle(toCameraDirection, lInvTilt * Anchor.up);
+            float pitchAngle = Vector3.Angle(toCameraDirection, invTilt * Anchor.up);
 
-            float lPitchDelta = (invertPitch ? -1f : 1f) * InputSource.GetCameraTwoAxis().y;
-            if (lPitchAngle < MIN_PITCH && lPitchDelta > 0f)
+            float pitchDelta = (invertPitch ? -1f : 1f) * InputSource.GetCameraTwoAxis().y;
+            if (pitchAngle < minPitch && pitchDelta > 0f)
             {
-                lPitchDelta = 0f;
+                pitchDelta = 0f;
             }
-            else if (lPitchAngle > MAX_PITCH && lPitchDelta < 0f)
+            else if (pitchAngle > maxPitch && pitchDelta < 0f)
             {
-                lPitchDelta = 0f;
+                pitchDelta = 0f;
             }
 
-            Quaternion lPitch = Quaternion.AngleAxis(lPitchDelta, lInvTilt * transform.right);
+            Quaternion pitch = Quaternion.AngleAxis(pitchDelta, invTilt * transform.right);
 
             // Calculate the new "natural up" direction
-            toCameraDirection = lPitch * lYaw * toCameraDirection;
-            // end if
+            toCameraDirection = pitch * yaw * toCameraDirection;
 
             // Update our tilt to match the anchor's tilt
             tilt = QuaternionExtensions.FromToRotation(tilt.Up(), Anchor.up) * tilt;
 
             // Put the new direction relative to the anchor's tilt
-            Vector3 lToCameraDirection = tilt * toCameraDirection;
-            if (lToCameraDirection.IsApproximatelyVectorZero())
+            Vector3 tiltedTocameraDirection = tilt * toCameraDirection;
+            if (tiltedTocameraDirection.IsApproximatelyVectorZero())
             {
-                lToCameraDirection = -Anchor.forward;
+                tiltedTocameraDirection = -Anchor.forward;
             }
 
             // Calculate the new orbit center (anchor) and camera position
-            newCameraPosition = ofsettedAnchorPosition + (lToCameraDirection.normalized * radius);
-            newCameraRotation = Quaternion.LookRotation(ofsettedAnchorPosition - newCameraPosition, Anchor.up);
-
-
-            // Set the values
-            transform.position = newCameraPosition;
-            transform.rotation = newCameraRotation;
+            transform.position = OffsettedAnchorPosition + tiltedTocameraDirection.normalized * radius;
+            transform.rotation =
+                Quaternion.LookRotation(
+                    OffsettedAnchorPosition - (OffsettedAnchorPosition + tiltedTocameraDirection.normalized * radius),
+                    Anchor.up);
         }
     }
 }
