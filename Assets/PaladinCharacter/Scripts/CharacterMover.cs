@@ -124,6 +124,7 @@ namespace PaladinCharacter
                     if (groundCheckResult.RaycastHitAnything && groundCheckResult.IsGrounded)
                     {
                         Rb.MovePosition(groundCheckResult.GroundHit.point);
+                        CheckGrounding();
                     }
                 }
 
