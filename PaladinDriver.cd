@@ -4,7 +4,7 @@
     <Position X="3" Y="7.75" Width="5" />
     <TypeIdentifier>
       <HashCode>gAQAEAAAAAAAAAAAAAIEIAAAAADAAAAAAAAAAABAAAI=</HashCode>
-      <FileName>Assets\Scripts\PaladinDriver.cs</FileName>
+      <FileName>Assets\PaladinCharacter\Scripts\PaladinDriver.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
@@ -15,7 +15,7 @@
     <Position X="3" Y="6" Width="5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
-      <FileName>Assets\Scripts\CharacterDriver.cs</FileName>
+      <FileName>Assets\PaladinCharacter\Scripts\CharacterDriver.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -23,7 +23,7 @@
     <Position X="3.5" Y="3.25" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAAAAAAAAAAEAAAAAAAAAAAAAAQAAAAQAAEA=</HashCode>
-      <FileName>Assets\Scripts\PawnDriver.cs</FileName>
+      <FileName>Assets\PaladinCharacter\Scripts\PawnDriver.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -31,7 +31,7 @@
     <Position X="4.5" Y="2" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Assets\Scripts\PawnDriver.cs</FileName>
+      <FileName>Assets\PaladinCharacter\Scripts\PawnDriver.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>

@@ -31,7 +31,7 @@ namespace PaladinCharacter
             return Input.GetButtonDown(dashButtonName);
         }
 
-        public bool WasAttackhPressed()
+        public bool WasAttackPressed()
         {
             return Input.GetButtonDown(attackButtonName);
         }

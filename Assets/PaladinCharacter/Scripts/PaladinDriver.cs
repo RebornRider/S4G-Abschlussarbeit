@@ -22,7 +22,7 @@ namespace PaladinCharacter
         {
             if (Animator.AttackBehaviour.IsAttacking == false)
             {
-                if (InputSource.WasAttackhPressed() && Mover.IsGrounded)
+                if (InputSource.WasAttackPressed() && Mover.IsGrounded)
                 {
                     StartAttacking();
                 }
