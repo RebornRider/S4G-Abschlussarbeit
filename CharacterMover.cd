@@ -1,21 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="PaladinCharacter.CharacterMover">
-    <Position X="0.75" Y="5.5" Width="2.5" />
+    <Position X="0.5" Y="5.5" Width="4" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="PaladinCharacter.CharacterMover.GroundCheckResult">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\PaladinCharacter\Scripts\CharacterMover.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>gAQAAAAAAgAAAAAAAAIACAAACAAAAQggAEAAAACAAQA=</HashCode>
-      <FileName>Assets\Scripts\CharacterMover.cs</FileName>
+      <HashCode>gAwAAAAAAgAAAAAAAAIACAAACAAAAQggAGAAQACAAQA=</HashCode>
+      <FileName>Assets\PaladinCharacter\Scripts\CharacterMover.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
-    <Position X="1" Y="0.5" Width="2" />
+    <Position X="1.75" Y="0.5" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Class Name="PaladinCharacter.ActorMover&lt;TActorAnimator&gt;">
-    <Position X="0.75" Y="1.75" Width="2.5" />
+    <Position X="0.5" Y="1.75" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAAAAMABAAAAAAAAAAIAAAACCQAAEA=</HashCode>
-      <FileName>Assets\Scripts\ActorMover.cs</FileName>
+      <FileName>Assets\PaladinCharacter\Scripts\ActorMover.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>

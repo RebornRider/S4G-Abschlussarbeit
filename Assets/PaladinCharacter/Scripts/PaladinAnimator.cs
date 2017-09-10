@@ -34,9 +34,26 @@ namespace PaladinCharacter
             Animator.SetTrigger(ParameterNameToHash["OnJump"]);
         }
 
+        private int notGroundedCounter;
         public void SetGrounding(bool isGrounded)
         {
-            Animator.SetBool(ParameterNameToHash["isGrounded"], isGrounded);
+            Animator.SetBool(ParameterNameToHash["IsGrounded"], isGrounded);
+
+            if (isGrounded)
+            {
+                notGroundedCounter = 0;
+            }
+            else
+            {
+                notGroundedCounter++;
+            }
+
+            if (notGroundedCounter > 5)
+            {
+                notGroundedCounter = 0;
+                Animator.SetTrigger(ParameterNameToHash["OnFalling"]);
+            }
+
         }
 
 

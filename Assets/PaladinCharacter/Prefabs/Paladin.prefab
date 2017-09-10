@@ -472,7 +472,7 @@ MonoBehaviour:
   sidewardSpeed: 100
   jumpHeight: 10
   dashDistance: 2
-  fallSpeed: 10
+  fallSpeed: 20
   sword: {fileID: 114078791416608352}
 --- !u!114 &114667268717086208
 MonoBehaviour:

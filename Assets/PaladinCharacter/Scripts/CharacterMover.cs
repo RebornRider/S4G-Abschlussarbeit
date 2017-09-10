@@ -1,5 +1,4 @@
 using PaladinCharacter.Utility;
-using System;
 using System.Linq;
 using UnityEngine;
 
@@ -49,18 +48,20 @@ namespace PaladinCharacter
 
         }
 
-        private bool HandleGroundCheckResult(ValueTuple<int, bool, RaycastHit> result)
+        private bool HandleGroundCheckResult(GroundCheckResult result)
         {
-            isGrounded = result.Item1 > 0 && result.Item2;
+            isGrounded = result.RaycastHitAnything && result.IsGrounded;
+
             if (isGrounded)
             {
-                groundHit = result.Item3;
+                groundHit = result.GroundHit;
                 Debug.DrawRay(groundHit.point, groundHit.normal * 10);
             }
-            return result.Item1 > 0;
+
+            return result.RaycastHitAnything;
         }
 
-        private ValueTuple<int, bool, RaycastHit> CheckGroundSimple()
+        private GroundCheckResult CheckGroundSimple()
         {
             int hitCount = Physics.RaycastNonAlloc(new Ray(GroundChecker.position + Vector3.up * 0.01f, Vector3.down),
                 results,
@@ -75,19 +76,15 @@ namespace PaladinCharacter
                     .OrderBy(hit => GroundChecker.position.y - hit.point.y);
 
                 bool grounded = distanceSortedColliders.Any();
-                return new ValueTuple<int, bool, RaycastHit>(hitCount, grounded,
+                return new GroundCheckResult(hitCount, grounded,
                     grounded ? distanceSortedColliders.First() : new RaycastHit());
             }
 
-            return new ValueTuple<int, bool, RaycastHit>(hitCount, false, new RaycastHit());
+            return new GroundCheckResult(hitCount, false, new RaycastHit());
         }
 
-        private ValueTuple<int, bool, RaycastHit> CheckGroundComplex()
+        private GroundCheckResult CheckGroundComplex()
         {
-            int hitCount = Physics.RaycastNonAlloc(new Ray(GroundChecker.position + Vector3.up * 0.01f, Vector3.down),
-                results,
-                GroundDistance + 0.01f, GroundLayers.value, QueryTriggerInteraction.Ignore);
-
             Vector3 sphereTarget = GroundChecker.position + Vector3.up * GroundSphereRadius;
             Vector3 sphereOrigin = sphereTarget + Vector3.up * GroundSphereRadius;
             int sphereHitCount = Physics.SphereCastNonAlloc(new Ray(sphereOrigin, Vector3.down), GroundSphereRadius, results, GroundSphereRadius + 0.01f, GroundLayers.value, QueryTriggerInteraction.Ignore);
@@ -101,11 +98,11 @@ namespace PaladinCharacter
                     .OrderBy(hit => sphereTarget.y - hit.point.y);
 
                 bool grounded = distanceSortedColliders.Any();
-                return new ValueTuple<int, bool, RaycastHit>(hitCount, grounded,
+                return new GroundCheckResult(sphereHitCount, grounded,
                     grounded ? distanceSortedColliders.First() : new RaycastHit());
             }
 
-            return new ValueTuple<int, bool, RaycastHit>(hitCount, false, new RaycastHit());
+            return new GroundCheckResult(sphereHitCount, false, new RaycastHit());
         }
 
         private Vector3 lastPos;
@@ -124,9 +121,9 @@ namespace PaladinCharacter
                 if (isGrounded == false)
                 {
                     var groundCheckResult = CheckGroundSimple();
-                    if (groundCheckResult.Item1 > 0 && groundCheckResult.Item2)
+                    if (groundCheckResult.RaycastHitAnything && groundCheckResult.IsGrounded)
                     {
-                        Rb.MovePosition(groundCheckResult.Item3.point);
+                        Rb.MovePosition(groundCheckResult.GroundHit.point);
                     }
                 }
 
@@ -159,6 +156,19 @@ namespace PaladinCharacter
 
             lastPos = transform.position;
         }
-    }
 
+        protected struct GroundCheckResult
+        {
+            public readonly bool RaycastHitAnything;
+            public readonly bool IsGrounded;
+            public readonly RaycastHit GroundHit;
+
+            public GroundCheckResult(int hitCount, bool onGroung, RaycastHit groundHit) : this()
+            {
+                RaycastHitAnything = hitCount > 0;
+                IsGrounded = onGroung;
+                GroundHit = groundHit;
+            }
+        }
+    }
 }
