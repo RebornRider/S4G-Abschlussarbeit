@@ -1,53 +1,81 @@
+// file:	Assets\PaladinCharacter\Scripts\CharacterMover.cs
+//
+// summary:	Implements the character mover class
+
 using PaladinCharacter.Utility;
 using System.Linq;
 using UnityEngine;
 
 namespace PaladinCharacter
 {
+    /// <summary>   A character mover. </summary>
     public class CharacterMover : ActorMover<PaladinAnimator>
     {
-        [SerializeField]
-        protected LayerMask GroundLayers;
-        [SerializeField]
-        protected float GroundDistance = 0.2f;
-        [SerializeField]
-        protected float GroundSphereRadius = 0.4f;
+        /// <summary>   The results. </summary>
+        private readonly RaycastHit[] results = new RaycastHit[16];
+
+        /// <summary>   The ground checker. </summary>
         [SerializeField]
         protected Transform GroundChecker;
 
+        /// <summary>   The ground distance. </summary>
+        [SerializeField]
+        protected float GroundDistance = 0.2f;
+
+        /// <summary>   The ground hit. </summary>
+        private RaycastHit groundHit;
+
+        /// <summary>   The ground layers. </summary>
+        [SerializeField]
+        protected LayerMask GroundLayers;
+
+        /// <summary>   The ground sphere radius. </summary>
+        [SerializeField]
+        protected float GroundSphereRadius = 0.4f;
+
+        /// <summary>   The last position. </summary>
+        private Vector3 lastPos;
+
+        /// <summary>   The look rotation. </summary>
+        private Quaternion lookRotation = Quaternion.identity;
+
+        /// <summary>   Dashes. </summary>
+        /// <param name="dashDistance"> The dash distance. </param>
         public void Dash(float dashDistance)
         {
-            Vector3 dashVelocity = Vector3.Scale(transform.forward, dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * Rb.drag + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * Rb.drag + 1)) / -Time.deltaTime)));
+            Vector3 dashVelocity = Vector3.Scale(transform.forward,
+                dashDistance * new Vector3(Mathf.Log(1f / (Time.deltaTime * Rb.drag + 1)) / -Time.deltaTime, 0,
+                    Mathf.Log(1f / (Time.deltaTime * Rb.drag + 1)) / -Time.deltaTime));
             Rb.AddForce(dashVelocity, ForceMode.VelocityChange);
         }
 
+        /// <summary>   Jumps. </summary>
+        /// <param name="jumpHeight">   Height of the jump. </param>
         public void Jump(float jumpHeight)
         {
             Rb.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
             Animator.JumpHandler();
         }
 
+        /// <summary>   Updates this object. </summary>
         public virtual void Update()
         {
             CheckGrounding();
         }
 
-        private readonly RaycastHit[] results = new RaycastHit[16];
-        private RaycastHit groundHit;
+        /// <summary>   Check grounding. </summary>
         public override void CheckGrounding()
         {
             if (HandleGroundCheckResult(CheckGroundSimple()))
             {
                 return;
             }
-
-            if (HandleGroundCheckResult(CheckGroundComplex()))
-            {
-                return;
-            }
-
+            HandleGroundCheckResult(CheckGroundComplex());
         }
 
+        /// <summary>   Handles the ground check result described by result. </summary>
+        /// <param name="result">   The result. </param>
+        /// <returns>   True if it succeeds, false if it fails. </returns>
         private bool HandleGroundCheckResult(GroundCheckResult result)
         {
             isGrounded = result.RaycastHitAnything && result.IsGrounded;
@@ -61,6 +89,8 @@ namespace PaladinCharacter
             return result.RaycastHitAnything;
         }
 
+        /// <summary>   Check ground simple. </summary>
+        /// <returns>   A GroundCheckResult. </returns>
         private GroundCheckResult CheckGroundSimple()
         {
             int hitCount = Physics.RaycastNonAlloc(new Ray(GroundChecker.position + Vector3.up * 0.01f, Vector3.down),
@@ -72,7 +102,7 @@ namespace PaladinCharacter
                     .Take(hitCount)
                     .Where(hit => hit.transform != null && hit.transform.gameObject != gameObject &&
                                   hit.collider.isTrigger == false &&
-                                  (GroundChecker.position.y - hit.point.y) > 0)
+                                  GroundChecker.position.y - hit.point.y > 0)
                     .OrderBy(hit => GroundChecker.position.y - hit.point.y);
 
                 bool grounded = distanceSortedColliders.Any();
@@ -83,18 +113,21 @@ namespace PaladinCharacter
             return new GroundCheckResult(hitCount, false, new RaycastHit());
         }
 
+        /// <summary>   Check ground complex. </summary>
+        /// <returns>   A GroundCheckResult. </returns>
         private GroundCheckResult CheckGroundComplex()
         {
             Vector3 sphereTarget = GroundChecker.position + Vector3.up * GroundSphereRadius;
             Vector3 sphereOrigin = sphereTarget + Vector3.up * GroundSphereRadius;
-            int sphereHitCount = Physics.SphereCastNonAlloc(new Ray(sphereOrigin, Vector3.down), GroundSphereRadius, results, GroundSphereRadius + 0.01f, GroundLayers.value, QueryTriggerInteraction.Ignore);
+            int sphereHitCount = Physics.SphereCastNonAlloc(new Ray(sphereOrigin, Vector3.down), GroundSphereRadius,
+                results, GroundSphereRadius + 0.01f, GroundLayers.value, QueryTriggerInteraction.Ignore);
             if (sphereHitCount > 0)
             {
                 IOrderedEnumerable<RaycastHit> distanceSortedColliders = results
                     .Take(sphereHitCount)
                     .Where(hit => hit.transform != null && hit.transform.gameObject != gameObject &&
                                   hit.collider.isTrigger == false &&
-                                  (sphereTarget.y - hit.point.y) > 0)
+                                  sphereTarget.y - hit.point.y > 0)
                     .OrderBy(hit => sphereTarget.y - hit.point.y);
 
                 bool grounded = distanceSortedColliders.Any();
@@ -105,8 +138,7 @@ namespace PaladinCharacter
             return new GroundCheckResult(sphereHitCount, false, new RaycastHit());
         }
 
-        private Vector3 lastPos;
-        private Quaternion lookRotation = Quaternion.identity;
+        /// <summary>   Fixed update. </summary>
         public virtual void FixedUpdate()
         {
             float distance = Vector3.Distance(lastPos, transform.position);
@@ -117,10 +149,9 @@ namespace PaladinCharacter
             Vector3 moveDelta = IntendedVelocity * Time.fixedDeltaTime;
             if (moveDelta.sqrMagnitude > 0.001)
             {
-
                 if (isGrounded == false)
                 {
-                    var groundCheckResult = CheckGroundSimple();
+                    GroundCheckResult groundCheckResult = CheckGroundSimple();
                     if (groundCheckResult.RaycastHitAnything && groundCheckResult.IsGrounded)
                     {
                         Rb.MovePosition(groundCheckResult.GroundHit.point);
@@ -148,9 +179,7 @@ namespace PaladinCharacter
 
             if (IntendedVelocity.x0z().IsApproximatelyVectorZero() == false)
             {
-
                 lookRotation = Quaternion.LookRotation(IntendedVelocity.x0z().normalized);
-
             }
             Rb.MoveRotation(lookRotation);
             Animator.SetGrounding(isGrounded);
@@ -158,16 +187,26 @@ namespace PaladinCharacter
             lastPos = transform.position;
         }
 
+        /// <summary>   Encapsulates the result of a ground check. </summary>
         protected struct GroundCheckResult
         {
+            /// <summary>   True if the raycast hit anything. </summary>
             public readonly bool RaycastHitAnything;
+
+            /// <summary>   True if this object is grounded. </summary>
             public readonly bool IsGrounded;
+
+            /// <summary>   The ground hit. </summary>
             public readonly RaycastHit GroundHit;
 
-            public GroundCheckResult(int hitCount, bool onGroung, RaycastHit groundHit) : this()
+            /// <summary>   Constructor. </summary>
+            /// <param name="hitCount">     Number of hits. </param>
+            /// <param name="onGround">     True to on ground. </param>
+            /// <param name="groundHit">    The ground hit. </param>
+            public GroundCheckResult(int hitCount, bool onGround, RaycastHit groundHit) : this()
             {
                 RaycastHitAnything = hitCount > 0;
-                IsGrounded = onGroung;
+                IsGrounded = onGround;
                 GroundHit = groundHit;
             }
         }

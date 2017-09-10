@@ -1,74 +1,71 @@
+// file:	Assets\PaladinCharacter\Scripts\Utility\QuaternionExtensions.cs
+//
+// summary:	Implements the quaternion extensions class
+
 using UnityEngine;
 
 namespace PaladinCharacter.Utility
 {
+    /// <summary>   A quaternion extensions. </summary>
     public static class QuaternionExtensions
     {
-        /// <summary>
-        /// Returns a vector representing this quaternion's forward direction
-        /// </summary>
-        /// <param name="rThis"></param>
-        /// <returns></returns>
-        public static Vector3 Forward(this Quaternion rThis)
+        /// <summary>   Returns a vector representing this quaternion's forward direction. </summary>
+        /// <param name="value">    The Quaternion to act on. </param>
+        /// <returns>   A Vector3. </returns>
+        public static Vector3 Forward(this Quaternion value)
         {
-            return new Vector3(2 * (rThis.x * rThis.z + rThis.w * rThis.y),
-                2 * (rThis.y * rThis.z - rThis.w * rThis.x),
-                1 - 2 * (rThis.x * rThis.x + rThis.y * rThis.y));
+            return new Vector3(2 * (value.x * value.z + value.w * value.y),
+                2 * (value.y * value.z - value.w * value.x),
+                1 - 2 * (value.x * value.x + value.y * value.y));
         }
 
-        /// <summary>
-        /// Returns a vector representing this quaternion's up direction
-        /// </summary>
-        /// <param name="rThis"></param>
-        /// <returns></returns>
-        public static Vector3 Up(this Quaternion rThis)
+        /// <summary>   Returns a vector representing this quaternion's up direction. </summary>
+        /// <param name="value">    The Quaternion to act on. </param>
+        /// <returns>   A Vector3. </returns>
+        public static Vector3 Up(this Quaternion value)
         {
-            return new Vector3(2 * (rThis.x * rThis.y - rThis.w * rThis.z),
-                1 - 2 * (rThis.x * rThis.x + rThis.z * rThis.z),
-                2 * (rThis.y * rThis.z + rThis.w * rThis.x));
+            return new Vector3(2 * (value.x * value.y - value.w * value.z),
+                1 - 2 * (value.x * value.x + value.z * value.z),
+                2 * (value.y * value.z + value.w * value.x));
         }
 
-        /// <summary>
-        /// Returns a vector representing this quaternion's right direction
-        /// </summary>
-        /// <param name="rThis"></param>
-        /// <returns></returns>
-        public static Vector3 Right(this Quaternion rThis)
+        /// <summary>   Returns a vector representing this quaternion's right direction. </summary>
+        /// <param name="value">    The Quaternion to act on. </param>
+        /// <returns>   A Vector3. </returns>
+        public static Vector3 Right(this Quaternion value)
         {
-            return new Vector3(1 - 2 * (rThis.y * rThis.y + rThis.z * rThis.z),
-                2 * (rThis.x * rThis.y + rThis.w * rThis.z),
-                2 * (rThis.x * rThis.z - rThis.w * rThis.y));
+            return new Vector3(1 - 2 * (value.y * value.y + value.z * value.z),
+                2 * (value.x * value.y + value.w * value.z),
+                2 * (value.x * value.z - value.w * value.y));
         }
 
-        /// <summary>
-        /// Handles smaller values better than Unity's version.
-        /// </summary>
-        /// <param name="u"></param>
-        /// <param name="v"></param>
-        /// <returns></returns>
-        public static Quaternion FromToRotation(Vector3 u, Vector3 v)
+        /// <summary>   Handles smaller values better than Unity's version. </summary>
+        /// <param name="u">    The from rotation. </param>
+        /// <param name="v">    The to rotation. </param>
+        /// <returns>   A Quaternion. </returns>
+        public static Quaternion FromToRotation(this Vector3 u, Vector3 v)
         {
-            float lTheta = Vector3.Dot(u.normalized, v.normalized);
+            float theta = Vector3.Dot(u.normalized, v.normalized);
 
-            if (lTheta >= 1f)
+            if (theta >= 1f)
             {
                 return Quaternion.identity;
             }
-            else if (lTheta <= -1f)
+            if (theta <= -1f)
             {
-                Vector3 lSimpleAxis = Vector3.Cross(u, Vector3.right);
-                if (lSimpleAxis.IsApproximatelyVectorZero())
+                Vector3 simpleAxis = Vector3.Cross(u, Vector3.right);
+                if (simpleAxis.IsApproximatelyVectorZero())
                 {
-                    lSimpleAxis = Vector3.Cross(u, Vector3.up);
+                    simpleAxis = Vector3.Cross(u, Vector3.up);
                 }
 
-                return Quaternion.AngleAxis(180f, lSimpleAxis);
+                return Quaternion.AngleAxis(180f, simpleAxis);
             }
 
-            float lRadians = Mathf.Acos(lTheta);
-            Vector3 lAxis = Vector3.Cross(u, v).normalized;
+            float radians = Mathf.Acos(theta);
+            Vector3 axis = Vector3.Cross(u, v).normalized;
 
-            return Quaternion.AngleAxis(lRadians * Mathf.Rad2Deg, lAxis);
+            return Quaternion.AngleAxis(radians * Mathf.Rad2Deg, axis);
         }
     }
 }

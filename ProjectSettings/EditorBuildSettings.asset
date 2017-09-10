@@ -4,4 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/PaladinCharacter/_Scenes/Test_Arena.unity
+    guid: 0f552a4adb817b84c833e18ee37c5a80

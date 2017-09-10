@@ -1,27 +1,27 @@
-﻿using UnityEngine;
+﻿// file:	Assets\PaladinCharacter\Scripts\EnemyAnimator.cs
+//
+// summary:	Implements the enemy animator class
 
 namespace PaladinCharacter
 {
+    /// <summary>   An enemy animator. </summary>
     public class EnemyAnimator : ActorAnimator
     {
+        /// <summary>   Gets the hit behaviour. </summary>
+        /// <value> The hit behaviour. </value>
+        public HitBehaviour HitBehaviour { get; private set; }
 
-        private HitBehaviour hitBehaviour;
-
-        public HitBehaviour HitBehaviour
-        {
-            get { return hitBehaviour; }
-        }
-
+        /// <summary>   Awakes this object. </summary>
         protected override void Awake()
         {
             base.Awake();
-            hitBehaviour = Animator.GetBehaviour<HitBehaviour>();
+            HitBehaviour = Animator.GetBehaviour<HitBehaviour>();
         }
 
+        /// <summary>   Handler, called when the hit. </summary>
         public void HitHandler()
         {
             Animator.SetTrigger(ParameterNameToHash["OnHit"]);
-
         }
     }
 }
